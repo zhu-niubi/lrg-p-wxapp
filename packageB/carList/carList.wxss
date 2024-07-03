@@ -1,0 +1,178 @@
+/* pages/zimu_nav/zimu_nav.wxss */
+page {
+    border-top: 0.5px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+scroll-view {
+    flex: 1;
+}
+
+page,
+scroll-view {
+    height: 100%;
+    overflow: hidden;
+}
+
+.con_list>view {
+    padding-left: 20rpx;
+}
+
+.con_list .title {
+    line-height: 60rpx;
+    background: #eee;
+    font-size: 27rpx;
+}
+
+.con_list .list {
+    line-height: 100rpx;
+    font-size: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.list image {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 6rpx;
+    vertical-align: middle;
+}
+
+.list .name {
+    display: inline-block;
+    margin-left: 20rpx;
+    font-size: 34rpx;
+    vertical-align: middle;
+}
+
+.nav {
+    position: fixed;
+    top: 50%;
+    right: 10rpx;
+    width: 40rpx;
+    z-index: 1;
+    transform: translateY(-50%);
+    margin-top: 44rpx;
+}
+
+.nav.touchmove {
+    background: #ddd;
+}
+
+.nav view {
+    font-size: 32rpx;
+    color: #666;
+    text-align: center;
+}
+
+.hint_bok {
+    position: fixed;
+    top: 50%;
+    right: 10%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    width: 100rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    padding: 15rpx 0;
+    font-size: 54rpx;
+}
+
+image {
+    height: 120rpx;
+    width: 120rpx;
+}
+
+
+.alphabet-list .section-item .section-item-header {
+    display: flex;
+    align-items: center;
+    font-size: 22rpx;
+    color: #a8a8a8;
+    background-color: #f2f4f5;
+    padding: 4rpx 20rpx;
+}
+
+.alphabet-list .section-item .section-item-cells {
+    padding: 2rpx 20rpx;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-bottom: 1rpx solid #dbdbdb;
+    background-color: #fff;
+}
+
+.alphabet-list .section-item .section-item-cells .section-item-cell {
+    font-size: 30rpx;
+    line-height: 1.0;
+    color: #333333;
+    /* padding: 29rpx 0; */
+}
+
+.alphabet-list .section-item .section-item-cells:last-of-type {
+    border-bottom: 0;
+}
+
+.section-item-cells text {
+    margin-left: 44rpx;
+}
+
+
+
+
+.tabSelect {
+    border-top: 0.5px solid #eee;
+    width: 100%;
+    display: flex;
+    background: #fff;
+    font-size: 34rpx;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+    width: 50%;
+    line-height: 88rpx;
+    text-align: center;
+    color: #666;
+}
+
+.tab.on {
+    color: #000000;
+}
+
+.line {
+    display: none;
+}
+
+.tab.on .line {
+    display: block;
+    width: 74rpx;
+    height: 6rpx;
+    margin: 0 auto;
+    background: #e06720;
+}
+
+.bg {
+    background: #eee;
+}
+
+.typeItem {
+    background: #fff;
+    border-radius: 16rpx;
+    width: 690rpx;
+    height: 150rpx;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    margin: 30rpx auto;
+    display: flex;
+    font-size: 32rpx;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.typeItem image {
+    width: 14rpx;
+    height: 26rpx;
+}

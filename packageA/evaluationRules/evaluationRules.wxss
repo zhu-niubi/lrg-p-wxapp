@@ -1,0 +1,48 @@
+/* packageA/evaluationRules/evaluationRules.wxss */
+.page{
+    width: 100%;
+}
+.page .header {
+    /* background-color: #000; */
+    width: 100%;
+    height: 25vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-image: url('http://backend-ngj.oss-cn-shanghai.aliyuncs.com/4418ce34eed3c4aa26d4f93e064365b.png');
+    border-bottom-left-radius: 30rpx; 
+    border-bottom-right-radius: 30rpx;
+}
+.header .title {
+    font-size: 30rpx;
+    font-weight: bold;
+    letter-spacing: 0.7rpx;
+    color: #fff;
+    margin-top: 50rpx;
+    font-style: italic;
+    transform: scale(1,0.7);
+}
+.page .contentArea {
+    width: 87%;
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 50rpx;
+    background-color: #fff;
+}
+.contentArea .title {
+    font-size: 30rpx;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-top: 50rpx;
+}
+.contentArea .content {
+    font-size: 25rpx;
+    line-height: 1.6;
+}
+.content .text {
+    margin-top: 15rpx;
+    margin-left: 20rpx;
+    color: #686868;
+}

@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "navigation": "/components/navigation/navigation",
+        "share-box": "/components/shareBox/index"
+      },
+      "enablePullDownRefresh": true,
+      "navigationBarTitleText": "NKD纳管家"
+}

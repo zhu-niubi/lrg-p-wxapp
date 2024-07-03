@@ -1,0 +1,114 @@
+/* packageA/engineerDetail/engineerDetail.wxss */
+.page {
+    width: 100%;
+}
+.page .header {
+    width: 100%;
+}
+.header .head_Img {
+    width: 100%;
+    height: 50vh;
+}
+.page .content {
+    width: 100%;
+    /* height: 100vh; */
+    position:absolute;
+    top: 44vh;
+    background-color: #fff;
+    border-top-right-radius: 120rpx; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: solid black; */
+}
+.content .name {
+    font-size: 50rpx;
+    padding: 30rpx;
+    font-weight: bold;
+}
+
+.content .levelArea {
+    width: 100%;
+    height: 50rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.levelArea .levelActive{
+    width: 30rpx;
+    height: 30rpx;
+    margin-left: 7rpx;
+}
+.levelArea .level{
+    width: 30rpx;
+    height: 30rpx;
+    margin-left: 7rpx;
+}
+.content .introduceArea {
+    margin-top: 30rpx;
+    margin-bottom: 40rpx;
+    display: flex;
+    flex-direction: row;
+    column-gap: 100rpx;
+}
+.introduceArea .yearArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.introduceArea .yearArea .yearNum {
+    font-size: 30rpx;
+    font-weight: bold;
+    letter-spacing: 5rpx;
+    margin-bottom: 10rpx;
+}
+.introduceArea .yearArea .des {
+    font-size: 20rpx;
+    /* font-weight: bold; */
+    color: #a3a3a3;
+    letter-spacing: 5rpx;
+}
+.introduceArea .customArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.introduceArea .customArea .des {
+    font-size: 20rpx;
+    /* font-weight: bold; */
+    color: #a3a3a3;
+    letter-spacing: 5rpx;
+}
+
+.introduceArea .customArea .customNum {
+    font-size: 30rpx;
+    font-weight: bold;
+    letter-spacing: 3rpx;
+    margin-bottom: 10rpx;
+}
+
+.content .certificate {
+    width: 100%;
+    /* height: 50vh; */
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: solid black; */
+
+}
+.content .certificate .img {
+    width: 90%;
+    height: 60vh; 
+}
+.content .certificate .name {
+    font-size: 40rpx;
+    color: #d42940;
+    position: absolute;
+    z-index: 3;
+    margin-top: 50rpx;
+}

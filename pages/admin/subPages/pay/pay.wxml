@@ -1,0 +1,142 @@
+<!--pages/admin/subPages/pay/pay.wxml-->
+<view class="page">
+    <image class="background" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/fe5ae537405d6678f5298745012d175.png" mode="aspectFill" />
+    <navigation backNum ="{{3}}"/>
+    <view class="header">
+        <view class="titleArea" wx:if="{{orderInfo.payStage == 3}}">
+            <van-icon name="certificate" size='40rpx'/>{{orderInfo.payStageName}}
+
+        </view>
+        <view wx:if="{{orderInfo.payStage !== 3 && orderInfo.status == 1 }}">
+            <view class="titleArea" >
+                <van-icon name="warning-o" size='40rpx' />{{orderInfo.payStageName}}
+            </view>
+            <view class="titleArea"> 请在<van-count-down class="page-color-gray" time="{{orderInfo.deadline}}" />分钟内完成支付</view>
+        </view>
+        <view wx:if="{{orderInfo.payStage !== 3 && orderInfo.status == 0 }}">
+            <view class="titleArea" >
+                <van-icon name="warning-o" size='40rpx' />{{orderInfo.payStageName}}
+            </view>
+        </view>
+    </view>
+    <view class="erImgArea" wx:if="{{orderInfo.payStage == 3}}">
+        <view class="title">
+            待核销数量：{{orderInfo.usedSkuList.length}}
+        </view>
+        <view class="img">
+            <image  mode="scaleToFill" style="width: 120px; height: 120px;" src="{{renderImg}}" />
+        </view>
+    </view>
+    
+    <view class="content">
+        <view class="orderContent">
+            <view class="productArea">
+                <view class="p_img">
+                    <image style="height: 100%; width: 100%;border-radius: 20rpx;" mode="aspectFill" src="{{productData.productImg}}"></image>
+                </view>
+                <view class="desc">
+                    <view class="name">
+                        {{productData.type == 1 ?'部位:' : '名称:'}}{{productData.type == 1 ?productData.proList[0].productName :  productData.productName}}
+                    </view>
+                    <view class="name_price">
+                        价格:{{productData.type == 1 ?productData.proList[0].productPrice :  productData.productPrice}}¥
+                    </view>
+                    <view class="des" wx:if="{{productData.type !== 1 && productData.proList.length > 1}}">
+                        规格：{{productData.productSpecificate}}
+                    </view>
+                </view>
+            </view>
+            <view class="listSkuArea">
+                <view class="icon_sku" wx:if="{{productData.proList.length > 1}}" bindtap="moreSku">
+                    更多<van-icon name="{{moreSku ? 'arrow-up' : 'arrow-down'}}" />
+                </view>
+                <view  wx:if="{{moreSku}}" >
+                    <view class="flex page-margin-y-xs" wx:for="{{productData.proList}}" wx:key="index" wx:if="{{index > 0}}">
+                    <view class="flex-3">
+                        <image class="productImg" src="{{productData.productImg}}" mode="aspectFill" />
+                    </view>
+                    <view class="flex-9 page-margin-l-sm clear-float desc">
+                        <view class="name">部位:{{item.productName}}</view>
+                        <view class="name_price">价格:{{item.productPrice}}¥</view>
+                    </view>
+                    </view>
+                    
+                </view>
+            </view>
+            <view class="orderArea">
+                <view class="flex page-margin-y-md"  wx:if="{{productData.productType == 0}}">
+                    <view class="page-color-gray">
+                        商品总额
+                        <van-icon name="cash-o" />
+                    </view>
+                    <!-- <view class="bold">{{productType == 1 ? '积分'+point : '在线支付'+price}}</view> -->
+                    <view class="bold">
+                        ￥{{productData.type == 1 ? orderInfo.t_amount:productData.productPrice}}
+                    </view>
+                </view>
+
+                <!-- <view class="flex page-margin-y-md">
+                    <view class="page-color-gray">
+                        优惠券<van-icon name="coupon-o" />
+                    </view>
+                    <view class="page-color-gray">
+                        无可用优惠券<van-icon name="arrow" />
+                    </view>
+                </view> -->
+                <view class="flex page-margin-y-md" wx:if="{{productData.productType == 0}}">
+                    <view class="page-color-gray">
+                        优惠金额
+                        <van-icon name="after-sale" />
+                    </view>
+                    <view class="page-color-black">
+                        <view class="bold">减￥{{productData.productType == 0 ? productData.discountedPrice : productData.productPrice}}</view>
+                    </view>
+                </view>
+                <view class="flex page-margin-y-md">
+                    <view class="page-color-gray">
+                        {{productData.productType == 0 ? '消费金额': '消费积分'}} <van-icon name="points" />
+                        
+                    </view>
+                    <!-- <view class="bold">{{productType == 1 ? '积分'+point : '在线支付'+price}}</view> -->
+                    <block wx:if="{{ productData.productType == 1 }}">
+                       {{ productData.productPoint }}
+                    </block>
+                    <block wx:else>
+                        ￥{{ (productData.type == 1 ? orderInfo.t_amount : productData.productPrice) - productData.discountedPrice }}
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="title">
+            <van-icon color='#ff7416' name="shopping-cart-o" size='40rpx'/>订单信息
+            <span class="title_des">*通过订单编号可在'我的'订单中查询详细信息</span>
+        </view>
+        <view class="des" wx:if="{{orderInfo.payStage !== 3 && orderInfo.status == 1 }}">
+            <view class="des_title">订单编号:</view>
+            <span class="des_content">{{orderInfo.orderNumber}}</span>
+            <van-button bind:click="handleCopy" data-value="{{orderInfo.orderNumber}}" round size="small" plain>复制</van-button>
+        </view>
+        
+        <view class="des">
+            <view class="des_title">创建时间:</view>
+            <span class="des_content">{{orderInfo.createdAt}}</span>
+        </view>
+        <view class="des" >
+            <view class="des_title">支付方式:</view>
+            <span class="des_content">{{orderInfo.isPoint == 1 ? '积分支付':'线上支付'}}</span>
+        </view>
+        <view class="btnArea" wx:if="{{orderInfo.payStage !== 3 && orderInfo.status == 1 }}">
+         <view class="btn1">
+            <van-button round color="#c3c3c3"  size="small" bindtap="deleteOrder">取消订单</van-button>
+         </view>
+        <view class="btn2">
+            <van-button round color="#ea5404" size="small" bindtap="payNow">立即支付</van-button>
+
+        </view>
+       
+ 
+        </view>
+        
+    </view>
+</view>
+<van-dialog id="van-dialog" />

@@ -1,0 +1,42 @@
+<!--packageB/caseDetail/caseDetail.wxml-->
+<view class="page" >
+    <navigation>案例详情</navigation>
+    <view class="header">
+        <view class="carName">
+            {{ caseData.carName }}-{{ caseData.productModelName }}
+        </view>
+        <view class="time">
+            上传时间：{{ caseData.createdAt }}
+        </view>
+    </view>
+    <view class="content">
+        <view class="title">
+            汽车参数：
+        </view>
+        <view class="desc">
+            <view class="itemName">
+                汽车品牌：{{ caseData.carBrandName }}
+            </view>
+            <view class="itemName">
+                车型：{{ caseData.carName }}
+            </view>
+            <view class="itemName">
+                产品类型：{{ caseData.productTypeName }}
+            </view>
+            <view class="itemName">
+                产品系列：{{ caseData.productModelName }}
+            </view>
+            <view class="itemName_l">
+                门店：{{ caseData.storeName }}
+            </view>
+        </view>
+    </view>
+    <view class="imgArea">
+        <view class="imgName">
+            车辆外观：
+        </view>
+        <view class="imgs" wx:for="{{ caseData.src }}" wx:key="index">
+            <image class="img" mode="aspectFill" src="{{ item }}"></image>
+        </view>
+    </view>
+</view>

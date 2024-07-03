@@ -1,0 +1,186 @@
+.header {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.swiperBox {
+    width: 100%;
+    height: 50vh;
+}
+
+swiper-item {
+    height: 100vw;
+}
+
+swiper-item image {
+    width: 100%;
+    height: 100vw;
+}
+
+.page-top-search {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+
+.van-search__content {
+    background-color: var(--search-background-color, rgba(0, 0, 0, 0.3)) !important;
+}
+
+.vant-custom {
+    padding: 100rpx 230rpx 10rpx 30rpx !important;
+}
+
+.van-goods-action-custom {
+    border: 1px solid red !important;
+}
+
+.page-content .card-1 .priceArea {
+    width: 100%;
+    height: 60rpx;
+}
+.page-content .card-1 .m_icon {
+    width: 40rpx;
+    height: 40rpx;
+}
+.page-content .card-1 .price {
+    font-size: 45rpx;
+    color: #6c3908;
+}
+.page-content .card-1 .specification {
+    color: #c3c3c3;
+    font-size: 20rpx;
+    margin-left: 100rpx;
+}
+.page-content .card-1 .nameArea {
+    width: 100%;
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    /* border: black solid; */
+}
+.page-content .card-1 .nameArea .name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25rpx;
+    font-weight: bold;
+    letter-spacing: 2rpx;
+    margin-right: 38rpx;
+    /* border: black solid; */
+
+}
+.page-content .card-1 .signArea {
+    width: 25%;
+    height: 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: black solid; */
+    background-color: #ffe2ab;
+    border-radius: 16rpx;
+    margin-right: 38rpx;
+
+    font-size: 23rpx;
+    color: #6c3908;
+}
+.page-content .card-1 .nameArea .remainder {
+    color: #c3c3c3;
+    font-size: 20rpx;
+}
+
+.page-content .card-1 .desArea {
+    width: 100%;
+    height: 30rpx;
+    display: flex;
+    align-items: center;
+    /* border: black solid; */
+    margin-top: 30rpx;
+    margin-left: 23rpx;
+    font-size: 23rpx;
+    letter-spacing: 2rpx;
+    color: #686868;
+}
+.page-content .quantityArea {
+    width: 100%;
+    height: 100rpx;
+    /* border: black solid 2rpx; */
+    /* margin-left: 30rpx; */
+
+}
+.quantityArea .title {
+    font-size: 28rpx;
+    margin-left: 30rpx;
+}
+.quantityArea .num {
+
+    width: 30%;
+    height: 40rpx;
+    font-size: 25rpx;
+    margin-left: 30rpx;
+    margin-top: 10rpx;
+    /* border: #6c3908 solid 5rpx; */
+    color: #6c3908;
+}
+
+.num .select {
+    width: 20rpx;
+    height: 20rpx;
+    margin-left: 130rpx;
+}
+
+.page-content .specifyArea {
+    width: 100%;
+    /* height: 300rpx; */
+    /* border: #6c3908 solid 2rpx; */
+}
+.page-content .specifyArea .sp_title {
+    width: 100%;
+    height: 60rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    /* border: black solid 1rpx; */
+}
+.page-content .specifyArea .sp_switch{
+    width: 100%;
+    height: 60rpx;
+    font-size: 28rpx;
+    font-weight: bold;
+    /* border: solid; */
+    display: flex;
+    align-items: center;
+}
+.page-content .specifyArea .sp_numArea {
+    width: 100%;
+    /* height: 200rpx; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* border: springgreen solid 2rpx; */
+}
+
+.sp_numArea .sp_num {
+    /* width: 100%; */
+    height: 35rpx;
+    /* border: black solid 2rpx; */
+    margin-left: 20rpx;
+    border-radius: 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c3c3c3;
+    color: #fff;
+    font-size: 22rpx;
+    letter-spacing: 2rpx;
+    padding: 10rpx;
+    margin-bottom: 20rpx;
+}
+
+
+

@@ -1,0 +1,80 @@
+<!-- index.wxml -->
+<view class="page">
+    <!-- 导航栏 -->
+    <navigation>个人档案</navigation>
+    <!-- 头像授权/展示 -->
+    <block wx:if="{{userInfo}}">
+        <view class="top-card" style="{{bgImg}}">
+            <view class="page-top-padding" style="padding-top:{{navbarHeight}}px;"> </view>
+            <!--内容部分 -->
+            <view class="page-position">
+                <!-- 会员权益 -->
+                <view class="card">
+                    <!-- 用户头像 -->
+
+                    <button plain="{{true}}" open-type="chooseAvatar" class="page-text-align-center page-padding-y-md page-border-none" bind:chooseavatar="onChooseAvatar" data-name="avatarUrl">
+                        <image class="userinfo-avatar-image" src="{{ userInfo.avatarUrl }}" mode="aspectFill"></image>
+                    </button>
+
+                    <view class="information flex">
+                        <view>昵称：</view>
+                        <view class="input flex">
+                            <input type="nickname" value="{{userInfo.nickname}}" bindblur='handleEdit' data-name="nickname" />
+                            <van-icon custom-class="page-margin-l-xs" name="arrow" />
+                        </view>
+                    </view>
+                    <view class="information flex">
+                        <view>姓名：</view>
+                        <view class="input flex">
+                            <input type="text" value="{{userInfo.name}}" bindblur='handleEdit' data-name="name" />
+                            <van-icon custom-class="page-margin-l-xs" name="arrow" />
+                        </view>
+                    </view>
+                    <view class="information flex">
+                        <view>性别：</view>
+                        <picker bindchange="handleGender" value="{{genderIndex}}" range="{{genderList}}" range-key="name" data-name="gender">
+                            <view class="input flex">
+                                <input value="{{genderList[genderIndex]['name']}}" disabled></input>
+                                <van-icon custom-class="page-margin-l-xs" name="arrow" />
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="information flex">
+                        <view>手机号：</view>
+                        <view class="input flex">
+                            <input type="number" disabled value="{{userInfo.phoneNumber}}" bindblur='handleEdit' data-name="phoneNumber" />
+                        </view>
+                    </view>
+                    <view class="information flex">
+                        <view>生日：</view>
+                        <picker mode="date" bindchange="handleBirthday" value="{{userInfo.birthday}}" data-name='birthday'>
+                            <view class="input flex">
+                                <input value="{{userInfo.birthday}}" disabled />
+                                <van-icon custom-class="page-margin-l-xs" name="arrow" />
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="information flex">
+                        <view>国家：</view>
+                        <picker bindchange="handleCountry" value="{{countryIndex}}" range="{{countryList}}" data-name="country">
+                            <view class="input flex">
+                                <input value="{{countryList[countryIndex]}}" disabled></input>
+                                <van-icon custom-class="page-margin-l-xs" name="arrow" />
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="information flex">
+                        <view>城市：</view>
+                        <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+                            <view class="input flex">
+                                <input value="{{region[0]}} {{region[1]}} {{region[2]}}" disabled />
+                                <van-icon custom-class="page-margin-l-xs" name="arrow" />
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </block>
+</view>

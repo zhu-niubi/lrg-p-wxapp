@@ -1,0 +1,25 @@
+<!-- index.wxml -->
+<view class="page-wrapper">
+  <view wx:if="{{slideList && slideList.length!==0}}">
+    <swiper indicator-dots="true" style="height:{{windowHeight}}px">
+      <block wx:for="{{slideList}}" wx:for-index="slideIndex" wx:key="slideIndex" wx:for-item="slideitem">
+        <swiper-item>
+          <view class="swiper-item" style="background-image: url({{slideitem.url}});"></view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="page-footer page-text-align-center">
+    <view class="font-color-fff page-padding-b-md">
+      <view class="page-margin-y-lg">
+        <view class="page-size-4 bold">纳管家</view>
+        <view class="page-margin-y-md">更省心的装贴服务、更精致的爱车生活</view>
+      </view>
+      <view></view>
+      <view class="flex-around">
+        <button class="mg-btn mg-btn-theme-w {{userToken ? 'primary' : ''}} iconfont icon-jurassic_user" bindtap="gotopage"></button>
+        <!-- <button class="mg-btn {{userToken ? 'primary' : ''}} iconfont icon-jurassic_user" bindtap="gotopage"></button> -->
+      </view>
+    </view>
+  </view>
+</view>

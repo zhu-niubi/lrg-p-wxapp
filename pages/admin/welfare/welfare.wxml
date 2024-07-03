@@ -1,0 +1,45 @@
+<!-- myCard.wxml -->
+<view class="page-1">
+  <!-- 导航栏 -->
+  <navigation>会员权益</navigation>
+  <view>
+    <!-- 权益信息 -->
+    <block wx:if="{{welfareInfoList}}">
+      <view class="page-bj">
+        <view style="padding-top:{{navbarHeight}}px;"> </view>
+        <!--内容部分 -->
+
+        <!-- 左边分类导航栏 -->
+        <van-tree-select items="{{ welfareInfoList }}" height="89vh" main-active-index="{{ activeTab }}" bind:click-nav="onClickNav">
+          <view slot="content">
+            <scroll-view scroll-y="true" class="scrollHeight " scroll-into-view="{{'w'+activeKey}}" scroll-with-animation="true" bindscroll="scroll">
+              <view class="welfare  page-padding-b-md" wx:for="{{welfareInfoList}}" wx:for-index="index" wx:key="index" id="{{'w'+index}}">
+                <view class="page-text-align-center ">
+                  <image mode="aspectFill" class="page-image-size-xs" src="{{ item.image }}"></image>
+                  <view class="page-size-1 ">{{ item.name }}</view>
+                </view>
+
+                <view class="page-content">
+                  <rich-text nodes="{{ item.describe}}" class="rich-text" user-select="true"></rich-text>
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+        </van-tree-select>
+
+
+
+
+
+        <!-- <van-tabs swipeable color="#ff7416" swipe-threshold="4">
+          <van-tab wx:for="{{welfareInfoList}}" wx:key="index" title="{{item.name}}">
+            <view class=" page-content">
+              <rich-text nodes="{{item.describe}}" class="rich-text" user-select="true"></rich-text>
+            </view>
+          </van-tab>
+        </van-tabs> -->
+
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<view class="page" style="height:{{windowHeight}}px;">
+  <view class="page-bj card-bj-img" style="background-image: url({{bgImg}});">
+    <!-- 导航栏 -->
+    <navigation>授权登录</navigation>
+    <view class="page-footer">
+      <button class="mg-btn primary mg-btn-theme-w" bindtap="getUserProfile">点击授权</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,94 @@
+<view class="page">
+    <!-- 导航栏 -->
+    <navigation>个人卡券</navigation>
+    <!-- 卡券信息 -->
+    <view class="top-card" style="{{bgImg}}">
+        <view class="page-top-padding" style="padding-top:{{navbarHeight}}px;"> </view>
+        <view class="page-position">
+            <!-- 卡卷 -->
+            <view class="card">
+                <view class="flex">
+                    <view class="page-size-3 bold">{{cardInfo.cardObj.couponTemplateName||'xxx券'}}</view>
+                    <view class="page-size-1">共 {{cardInfo.totalNumber}} 张</view>
+                </view>
+                <!-- 卡片 -->
+                <view class="card page-bj-gray card-top-padding card-bj-img" style="background-image: url('{{cardInfo.cardObj.couponTemplateImage || '' }}');">
+                    <!-- <view class="h2">{{cardInfo.cardObj.couponTemplateName}}</view> -->
+                    <view class="clear-float font-color-fff">
+                        <view class="float-left " bindtap='handleIsExpand'>使用说明
+                            <van-icon name="{{isExpand ? 'arrow-up' : 'arrow-down' }}" />
+                        </view>
+                    </view>
+                </view>
+                <!-- 使用说明-->
+                <view class="round-xspage-lucency page-padding-a-sm {{isExpand ? '' : 'isExpand' }}">
+                    <view class="page-size-1 page-padding-b-xs">
+                        <span>{{cardInfo.cardObj.memo||'卡券说明xxx x'}}</span>
+                    </view>
+
+                    <!-- 门店显示 -->
+                    <view class="page-size-1 page-padding-b-xs">
+                        仅限 <span wx:for="{{storeInfo.list}}" wx:for-item="storeItem" wx:for-index="storeIndex" wx:key="storeIndex">
+                            <span wx:for="{{cardInfo.cardObj.applyStore}}" wx:for-item="appItem" wx:for-index="appIndex" wx:key="appIndex">
+                                <span custom-class="page-margin-x-xs" size="medium" round color="teal" wx:if="{{appItem === storeItem.id && storeItem.name.length > 0}}">
+                                   {{storeItem.name+ '  '}}
+                                </span>
+                            </span>
+                        </span> 使用
+                    </view>
+                    <!-- 使用时间 -->
+                    <view class="page-size-1 page-padding-b-xs">
+                        使用时间：{{cardInfo.cardObj.createdAt}} 至 {{cardInfo.cardObj.deadline}}
+                    </view>
+                </view>
+                
+                <!-- 二维码 -->
+                <view class="page-text-align-center page-margin-y-md-1">
+                    <view class="page-margin-y-md">卡号：{{cardInfo.cardObj.code}}</view>
+
+                    <view class="canvas page-box-auto page-position-r">
+                        <!-- <canvas wx:if="{{!isMask}}" style="width: 150px; height: 150px; opacity: 0 !important;" canvas-id="myQrcode"></canvas> -->
+                        <!-- <image class="page-position-t" mode="scaleToFill" style="width: 150px; height: 150px;" src="{{renderImg}}"></image> -->
+                        <image class="page-position-auto" mode="scaleToFill" style="width: 150px; height: 150px;" src="{{renderImg}}"></image>
+
+                        <view class="isMask" wx:if="{{isMask}}">
+                            <view class="page-position-auto" wx:if="{{isSend}}">
+                                <view>
+                                    <icon type="success" size="90"></icon>
+                                </view>
+                                <view>扫码成功</view>
+                            </view>
+
+                            <view wx:else>
+                                <van-icon name="replay" size="80rpx" class="page-position-auto" bindtap='handleMask' />
+                            </view>
+                        </view>
+
+                    </view>
+                </view>
+
+            </view>
+            <!-- 日历 -->
+            <view class="card">
+                <calendar title="{{cardInfo.cardObj.couponTemplateName}}日历" spotMap="{{spotMap}}" bindgetDateList="getDateList" bindselectDay="selectDay"></calendar>
+            </view>
+            <!-- 已使用卡券 -->
+            <view class="card">
+                <van-tabs active="{{ active }}" bind:change="onChange" color="#fff">
+                    <van-tab name="2" title="已使用"></van-tab>
+                    <van-tab name="3" title="已过期"></van-tab>
+                </van-tabs>
+
+                <block>
+                    <view class="card-coupons card-bj-img" style="background-image: url('{{itemUseCard.couponTemplateImage ||''}}');" wx:for="{{cardUseInfo}}" wx:for-item="itemUseCard" wx:for-index="indexUseCard" wx:key="indexUseCard">
+                        <view class="card-coupons-content">
+                            <view class="span ">限 {{itemUseCard.createdAt}} 至 {{itemUseCard.deadline}} 使用</view>
+                        </view>
+                        <image class="card-coupons-icon" src="/images/weibiaoti1.png" wx:if="{{active == 2}}"></image>
+                        <image class="card-coupons-icon" src="/images/yiguoqi.png" wx:if="{{active == 3}}"></image>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

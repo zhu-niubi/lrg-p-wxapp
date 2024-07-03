@@ -1,0 +1,44 @@
+<!-- myCard.wxml -->
+<view class="page">
+  <!-- 导航栏 -->
+  <navigation>车辆管理</navigation>
+  <view class="page-content" style="min-height: {{windowHeight}}px;">
+    <!-- 车辆信息 -->
+    <block wx:if="{{myCarInfoList}}">
+      <view class=" page-padding-b-lg">
+        <view style="padding-top:{{navbarHeight}}px;"> </view>
+        <!--内容部分 -->
+        <view class="card" wx:for="{{ myCarInfoList }}" wx:for-item="itemCar" wx:for-index="indexCar" wx:key="indexCar">
+          <view class="page-padding-b-xs">
+            <view class="page-padding-b-xs">
+              <span class="bold page-size-3">{{itemCar.carBrand}} {{ itemCar.carName}}</span>
+              <span class="page-round-card">{{itemCar.color}}</span>
+              <span wx:if="{{itemCar.id == switchValue}}" class="page-size-1 page-round-card page-lucency-2">默认</span>
+            </view>
+            <view class="page-size-1 page-padding-b-xs">{{itemCar.VIN}} <span class="page-round-card page-lucency">{{itemCar.carNumber}}</span></view>
+            <view class="page-size-1 page-color-gray page-padding-b-xs">{{itemCar.phoneNumber}}</view>
+          </view>
+
+          <!-- 设置默认按钮 -->
+          <view class="page-size-1">
+            <!-- <switch class="wx-switch-input" type="checkbox" color="#ff7416" disabled="{{itemCar.isShow}}" checked="{{itemCar.isShow}}" data-index="{{indexCar}}" bindchange="switchChange" />设置默认 -->
+
+            <van-radio-group value="{{ switchValue }}" bind:change="switchChange">
+              <van-radio name="{{itemCar.id}}" checked-color="#ff7416">设置默认</van-radio>
+            </van-radio-group>
+          </view>
+          <!-- 操作按钮 -->
+          <view class="page-position-y flex-direction">
+            <van-icon name="edit" class="page-size-4 page-color-gray page-padding-a-sm" bindtap="handleAddCars" data-item="{{itemCar}}" />
+            <van-icon name="delete-o" class="page-size-4 page-color-gray page-padding-a-sm" bindtap="handleDeleteCar" data-id="{{itemCar.id}}" />
+          </view>
+        </view>
+
+        <!-- 添加按钮 -->
+        <view class="page-footer-1">
+          <button class="mg-btn primary mg-btn-theme-w" bindtap="handleAddCars">添加车辆</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

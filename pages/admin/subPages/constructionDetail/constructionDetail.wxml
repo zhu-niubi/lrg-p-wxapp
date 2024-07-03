@@ -1,0 +1,116 @@
+<!-- index.wxml -->
+<view class="page">
+    <!-- 导航栏 -->
+    <navigation>施工单详情</navigation>
+    <view class="page-content page-padding-b-lg" style="padding-top:{{navbarHeight}}px;">
+
+        <!-- 步骤条  -->
+        <view class="card">
+            <van-steps steps="{{ steps }}" active="{{ statusActive }}" direction="vertical" active-color="#ff7416" />
+            <view class="page-text-align-center page-margin-t-sm page-color-gray" bindtap="handleSteps">
+                {{isExpand ? '收起' : '查看更多' }}
+                <van-icon name="{{isExpand ? 'arrow-up' : 'arrow-down' }}" />
+            </view>
+        </view>
+        <!-- 显示数据部分 -->
+        <view class="card flex">
+            <view>预计完成时间：</view>
+            <view class="page-color-gray">{{constructionInfo.expectComplete}}</view>
+        </view>
+        <!--内容部分 -->
+        <view class="card ">
+            <view class="page-margin-y-xs">
+                <view class="page-size-3 bold">{{constructionInfo.storeName}}</view>
+            </view>
+            <view class="information">
+                <view class="page-size-2 bold">施工单号：{{constructionInfo.code}}</view>
+                <view class="page-margin-t-sm">用户名：{{constructionInfo.userName}}</view>
+                <view class="page-margin-t-sm">手机号：{{constructionInfo.phoneNumber}}</view>
+                <view class="page-margin-t-sm">公里数：{{constructionInfo.kilometer}}</view>
+                <view class="page-margin-t-sm">汽车品牌：{{constructionInfo.carBrandName}}</view>
+                <view class="page-margin-t-sm">汽车型号：{{constructionInfo.carName}}</view>
+                <view class="page-margin-t-sm">车牌号：{{constructionInfo.carNumber}}</view>
+                <view wx:for="{{constructionInfo.newconstructionSku}}" wx:key="indexProType" wx:for-item="itemProType">
+                    <view class="page-margin-t-lg"><span class="page-margin-r-md">产品类型：{{itemProType.productTypeName}}</span> 产品系列：{{itemProType.productModelName}}</view>
+                    <view class="page-margin-t-sm">
+                        <view class="page-theme-color">{{itemProType.productName}}</view>
+                        <view wx:for="{{itemProType.productPosition}}" wx:key="indexPosition" wx:for-item="itemPosition">
+                            <view class="tag-ma-xs">
+                                <span class="page-color-gray">{{itemPosition.productSkuName}}：</span>
+                                <!-- <van-tag custom-class="page-margin-x-xs" size="medium" round color="teal" wx:if="{{itemPosition.rollNumber}}">膜卷：{{itemPosition.rollNumber}}</van-tag>
+                                <van-tag custom-class="page-margin-x-xs" size="medium" round type="success" wx:if="{{itemPosition.length}}">消耗米数：{{itemPosition.length}}</van-tag> -->
+                                <van-tag size="medium" round type="warning" wx:if="{{itemPosition.employeeName}}">技师：{{itemPosition.employeeName}}</van-tag>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <!-- 缺陷部位 -->
+                <view class="page-margin-t-md" wx:if="{{constructionInfo.defectPart.length > 0}}">
+                    <view>缺陷部位：</view>
+                    <view class="page-margin-t-sm">
+                        <van-checkbox-group direction="horizontal" value="{{ constructionInfo.defectPart  }}">
+                            <van-checkbox icon-size="48rpx" shape="square" custom-class="page-margin-y-xs" checked-color="#ff7416" wx:for="{{defectPartList}}" wx:for-item="itemDefectPart" wx:key="indexDefectPart" name="{{itemDefectPart.id}}">{{itemDefectPart.name}}</van-checkbox>
+                        </van-checkbox-group>
+                    </view>
+                </view>
+                <view class="page-margin-t-sm" wx:if="{{constructionInfo.defectType.length > 0}}">
+                    <view>缺陷原因：</view>
+                    <view class="page-margin-t-sm">
+                        <van-checkbox-group direction="horizontal" value="{{ constructionInfo.defectType}}">
+                            <van-checkbox icon-size="48rpx" shape="square" custom-class="page-margin-y-xs" checked-color="#ff7416" wx:for="{{defectTypeList}}" wx:for-item="itemDefectType" wx:key="indexDefectType" name="{{itemDefectType.id}}">{{itemDefectType.name}}</van-checkbox>
+                        </van-checkbox-group>
+                    </view>
+                </view>
+                <view class="page-margin-t-sm" wx:if="{{constructionInfo.defectImages.length > 0}}">
+                    <view>缺陷图片：</view>
+                    <view class="page-margin-t-sm">
+                        <image mode="aspectFill" class="page-image-size-lg-1 page-margin-r-sm" wx:for="{{constructionInfo.defectImages}}" wx:for-item="itemImage" wx:key="indexImage" wx:for-index="indexImage" src="{{itemImage}}" bindtap="previewImage" data-url="{{itemImage}}"></image>
+                    </view>
+                </view>
+                <view class="page-margin-t-sm" wx:if="{{constructionInfo.memo}}">
+                    <view>备注：</view>
+                    <view class="page-margin-t-sm">
+                        {{constructionInfo.memo}}
+                    </view>
+                </view>
+            </view>
+            <!-- 状态按钮 -->
+            <view  wx:if="{{constructionInfo.statusName}}" class="page-footer-1 page-text-align-center  page-margin-y-md">
+                <button class="mg-btn primary mg-btn-theme-w" data-id="{{constructionInfo.id}}" bindtap="constructionStartOk" data-status="{{constructionInfo.status}}">{{constructionInfo.statusName}}</button>
+            </view>
+        </view>
+    </view>
+</view>
+
+<van-dialog use-slot title="交车确认" show="{{ isShowCarOk }}" show-cancel-button bind:confirm="handleCarOkConfirm">
+    <view class="dialogHieght-md">
+        <van-panel>
+            <view  class="page-padding-a-sm page-size-2">
+                <view class="page-size-2 bold">注意事项:</view>
+                <view class="page-color-gray-1 n-gutter-xs">
+                    <view>1、补漆、掉漆的部位，施工时可能会出现局部掉漆</view>
+                    <view>2、发生碰撞部位，揭膜时可能出现局部掉漆</view>
+                    <view>3、安装完成后48小时内不能清洗车身，不能超过80公里/小时高速行驶，避免雨中行驶</view>
+                    <view>4、洗车时，避免用力过大地擦洗保护膜的边缘，避免用高压水枪直援冲洗保护膜边緣,避免高压水枪长时间中洗同一个小块区域</view>
+                    <view>5、日常清洁维护时不能使用掉色毛巾和其他易掉色物品擦拭</view>
+                    <view>6、不可使用吸ー吸附膜表面</view>
+                    <view>7、膜面上若有雨渍、鸟屎、虫尸、柏油、空调水或铁锈水等有腐蚀性的污渍，请在24小时内及时清洗</view>
+                    <view>8、安装后若膜面有雾感、小水泡，为正常现象，十天左右会自动消失</view>
+                    <view>9、安装后三天内若有起边、翘边现象，立即联系施工方回店检查维护</view>
+                    <view>
+                        <view>10、建议2-3个月做一次膜面养护</view>
+                        <view>质保范围：</view>
+                        <view>隐形车衣在质保期间：</view>
+                        <view>·不起泡  ·不龟裂  ·不脱胶</view>
+                        <view>在以下非质保范围内造成的损失，将无法承诺质保：</view>
+                        <view>·对隐形车衣不恰当清洗、保养或维护</view>
+                        <view>·事故或人为导致的隐形车衣的损坏</view>
+                        <view class="page-size-2 bold text-red">·本人已确认车辆按照服务内容已全部施工完毕，并检查车辆完好无损，车内无任何物品丢失，同意验收！</view>
+                    </view>
+                </view>
+            </view>
+        </van-panel>
+    </view>
+</van-dialog>
+
+<van-dialog id="van-dialog" />

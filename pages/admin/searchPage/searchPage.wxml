@@ -1,0 +1,60 @@
+<!-- myCard.wxml -->
+<view class="page-1">
+  <!-- 导航栏 -->
+  <!-- <navigation>搜索</navigation> -->
+
+  <view class="page-top-search page-position-fixed-t page-1">
+    <view class="flex">
+      <van-icon name="arrow-left" class="flex-1 page-size-4 page-margin-t-xl" bind:click="onClickLeft" />
+      <van-search class="flex-11" custom-class="vant-custom" value="{{ searchVal }}" shape="round" placeholder="请输入您喜欢的商品" bind:search="onFilterChange" />
+    </view>
+
+  </view>
+
+  <!--内容部分 -->
+  <view style="padding-top:{{navbarHeight}}px;"> </view>
+  <!-- 搜索历史 -->
+  <view class="page-content page-border-t">
+    <view class="flex">
+      <view class="page-size-3 bold">搜索历史</view>
+      <van-icon name="delete-o" class="page-size-3" bind:click="onResetHistory" />
+    </view>
+    <!-- 标签 -->
+    <view wx:if="{{historyList.length > 0}}" class="page-margin-y-sm">
+      <van-tag custom-class="van-tag-custom page-bj-gray" wx:for="{{historyList}}" wx:for-index="indexHistory" wx:key="indexHistory" wx:for-item="itemHistory" text-color="#000" round size="large" data-index="{{indexHistory}}" bindtap="onClickSearch" data-index="{{indexHistory}}" data-name="history">{{itemHistory}}</van-tag>
+    </view>
+    <view wx:else class="page-text-align-center page-color-gray page-margin-y-sm">
+      暂无搜索记录
+    </view>
+  </view>
+
+  <!-- 热门搜索 -->
+  <view class="page-content page-border-t">
+    <view class="flex">
+      <view class="page-size-3 bold">热门搜索</view>
+    </view>
+    <!-- 标签 -->
+    <view class="page-margin-y-sm">
+      <van-tag custom-class="van-tag-custom page-bj-gray" wx:for="{{hotList}}" wx:for-index="indexHot" wx:key="indexHot" wx:for-item="itemHot" text-color="#000" round size="large" data-index="{{indexHot}}" bindtap="onClickSearch" data-index="{{indexHot}}" data-name="hot">{{itemHot.title}}</van-tag>
+    </view>
+  </view>
+
+  <!-- 热门分类 -->
+  <view class="page-content page-border-t" wx:if="{{hotClassList.length}}">
+    <view class="flex">
+      <view class="page-size-3 bold">热门分类</view>
+    </view>
+
+    <view class="page-margin-y-sm">
+      <scroll-view scroll-x="true" bindscroll="scroll" class="scroll-view_H">
+        <view wx:for="{{hotClassList}}" wx:key="indexHotClass" wx:for-item="itemHotClass" class="page-inline-block page-margin-r-md page-text-align-center" bindtap="onClickHotClass" data-id="{{itemHotClass.id}}">
+          <image class="page-image-size-md" mode="aspectFill" src="{{ itemHotClass.image }}"></image>
+          <view>{{itemHotClass.name}}</view>
+        </view>
+      </scroll-view>
+    </view>
+
+
+  </view>
+
+</view>

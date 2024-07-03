@@ -1,0 +1,5 @@
+.item{
+    color: #000000;
+    font-size: 20rpx;
+    color: red;
+  }

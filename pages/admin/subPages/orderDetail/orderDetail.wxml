@@ -1,0 +1,194 @@
+<!-- myCard.wxml -->
+<view class="page-1">
+  <!-- 导航栏 -->
+  <navigation>订单详情</navigation>
+  <!-- 内容 -->
+  <view class="top-card" style="{{bgImg}}">
+    <view class="page-top-padding" style="padding-top:{{navbarHeight}}px;"> </view>
+    <view class="page-position page-position-t-xs page-padding-b-lg">
+      <!-- 倒计时  -->
+      <view class="page-margin-b-sm font-color-fff">
+        <view class="page-size-3">{{orderInfo.payStageName}}</view>
+        <view wx:if="{{(orderInfo.payStage == 0 || orderInfo.payStage == 1 )  && orderInfo.status !== 0}}" class="page-size-1 page-text-align-center clear-float page-margin-t-sm">
+          <span class="float-left"> 剩 </span>
+          <span class="page-margin-x-xs">
+            <van-count-down class="page-color-gray float-left" time="{{orderInfo.deadline}}" bind:finish="orderFinish" />
+          </span>
+          <span class="float-left"> 自动取消订单</span>
+        </view>
+        <view wx:if="{{orderInfo.status == 0}}" class="page-size-1 page-margin-t-sm">
+          很遗憾未能为您提供服务，期待您再次光临纳管家。
+        </view>
+      </view>
+      <!-- 商品 -->
+      <view class="card">
+        <view class="page-size-3 bold">商品</view>
+
+        <view class="flex page-margin-y-xs" wx:for="{{orderInfo.orderSku}}" wx:key="index">
+          <view class="flex-3">
+            <image class="p_img" src="{{item.productBanner[0]}}" mode="aspectFill" />
+          </view>
+          <view class="flex-9 page-margin-l-sm clear-float">
+            <view class="page-size-2 bold">{{item.productName}}</view>
+            <view class="page-size-1" style="font-size: 20rpx;color: #c3c3c3;margin-top: 20rpx;">规格：{{item.productSkuName}}</view>
+            <!-- <view class="page-theme-color bold"><span class="page-size-1">￥</span><span class="page-size-4">{{productInfo.price}}</span></view>
+            <view class="float-right page-color-gray"> x{{orderInfo.productCount ? orderInfo.productCount : shoppingNum}}</view> -->
+          </view>
+        </view>
+
+
+        <view wx:if="{{isExpand}}">
+          <!-- <view class="flex page-margin-y-md">
+            <view class="page-color-gray">商品总额</view>
+            <view class="bold">￥{{orderInfo.totalPrice}}</view>
+          </view> -->
+
+          <!-- <view wx:if="{{orderInfo.deposit}}" class="flex page-margin-y-md">
+            <view class="page-color-gray">定金</view>
+            <view class="bold"><span class="page-color-gray">x{{orderInfo.productCount ? orderInfo.productCount : shoppingNum}}</span> ￥{{productInfo.deposit}}</view>
+          </view> -->
+
+          <!-- <view wx:if="{{orderInfo.deposit}}" class="flex page-margin-y-md">
+            <view class="page-color-gray">
+              <view>尾款</view>
+              <view class="page-size-1 page-color-black">支付尾款时间：{{orderInfo.payBalanceAt}}</view>
+            </view>
+            <view class="bold">￥{{orderInfo.finalPrice}}</view>
+          </view> -->
+
+          <!-- <view class="flex page-margin-y-md">
+            <view class="page-color-gray">优惠</view>
+            <view class="page-theme-color bold">￥0</view>
+          </view> -->
+        </view>
+
+        <view class="flex page-margin-y-xs">
+          <view>{{orderInfo.isPoint == 1 ? '实付积分' : '实付款'}}</view>
+          <view class="page-theme-color bold" wx:if="{{orderInfo.isPoint == 1}}">
+            <van-icon name="points" /><span class=" page-size-3">{{orderInfo.t_point}}</span>
+          </view>
+          <view class="page-theme-color bold"wx:else="{{orderInfo.isPoint !== 1}}">
+            <van-icon name="gold-coin-o" /><span class=" page-size-3">{{orderInfo.t_amount}}</span>
+          </view>
+
+        </view>
+        <!-- <van-divider wx:if="{{isExpand}}" /> -->
+
+        <view class="flex page-margin-y-md">
+          <view>订单编号：</view>
+          <view>
+            <span class="page-color-gray">{{orderInfo.orderNumber}} |</span>
+            <van-button bind:click="handleCopy" data-value="{{orderInfo.orderNumber}}" custom-class="page-border-none page-padding-a page-padding-l-xs" round size="small" plain>复制</van-button>
+          </view>
+        </view>
+
+        <view class="flex page-margin-y-md">
+          <view>创建时间</view>
+          <view class="page-color-gray">{{orderInfo.createdAt}}</view>
+        </view>
+
+        <view class="flex page-margin-y-md" wx:if="{{orderInfo.payStage == 3}}">
+          <view>成交时间</view>
+          <view class="page-color-gray">{{orderInfo.updatedAt}}</view>
+        </view>
+
+        <view class="flex page-margin-y-md" wx:if="{{orderInfo.memo}}">
+          <view>备注：</view>
+          <view class="page-color-gray">{{orderInfo.memo}}</view>
+        </view>
+        <view class="flex page-margin-y-md erImgArea"  wx:if="{{orderInfo.status == 1}}">
+          <view class="title">
+            请到线下门店扫码消费
+          </view>
+          <image class="erImg" mode="scaleToFill"  src="{{renderImg}}"></image>
+          <view class="isMask" wx:if="{{isMask}}">
+              <view class="page-position-auto" wx:if="{{isSend}}">
+                  <view>
+                      <icon type="success" size="90"></icon>
+                  </view>
+                  <view>扫码成功</view>
+              </view>
+
+              <view wx:else>
+                  <van-icon name="replay" size="80rpx" class="page-position-auto" bindtap='onload' />
+              </view>
+          </view>
+        </view>
+
+
+        <!-- <view class="page-text-align-center page-margin-t-md page-color-gray" bindtap="handleOrderExpand">
+          {{isExpand ? '收起' : '查看更多' }}
+          <van-icon name="{{isExpand ? 'arrow-up' : 'arrow-down' }}" />
+        </view> -->
+      </view>
+    
+
+      <!-- 订单明细 -->
+      <!-- <view class="card">
+        <view class="page-size-3 bold">订单信息</view>
+        <view wx:for="{{orderInfo.payment}}" wx:for-index="indexPay" wx:for-item="itemPay" wx:key="indexPay">
+
+          <view class="flex page-margin-y-md">
+            <view>支付状态</view>
+            <view class="page-color-gray">{{itemPay.payStatusName}}</view>
+          </view>
+
+          <view class="flex page-margin-y-md">
+            <view>
+              <view>{{itemPay.billTypeName}}</view>
+              <view wx:if="{{itemPay.paymentAt !== 0}}" class="page-size-1 page-color-gray page-color-black">支付时间：{{itemPay.paymentAt}}</view>
+              <view class="page-size-1 page-color-gray page-color-black">支付方式：{{itemPay.paymentMethodName}}</view>
+            </view>
+            <view class="page-color-gray">￥{{itemPay.amount}}</view>
+          </view>
+        </view>
+
+        <view wx:if="{{orderInfo.coupon.length > 0}}" class="page-margin-y-md">
+          <view>卡券信息:</view>
+          <view class="page-color-gray flex" wx:for="{{orderInfo.coupon}}" wx:for-index="indexCoupon" wx:for-item="itemCoupon" wx:key="indexCoupon">
+            <view>{{itemCoupon.code}}</view>
+            <view>{{itemCoupon.statusName}}</view>
+          </view>
+        </view>
+
+      </view> -->
+
+
+      <!-- 遇到问题 -->
+      <!-- <view class="card">
+        <view class="page-size-3 bold">遇到问题？</view>
+
+        <van-grid column-num="2" direction="horizontal" border="{{ false }}">
+          <van-grid-item icon-class="page-theme-color" wx:for="{{ stepsList }}" wx:for-item="itemSteps" wx:for-index="indexSteps" wx:key="indexSteps" text="{{itemSteps.title }}" icon="{{itemSteps.icon}}" />
+        </van-grid>
+      </view> -->
+
+      <!-- 可能喜欢 -->
+      <view class="page-margin-t-md" wx:if="{{orderInfo.payStage === 3 || orderInfo.status === 0}}">
+        <!-- <van-grid column-num="1" direction="horizontal" border="{{ false }}">
+          <van-grid-item icon-class="page-theme-color page-img-level-text" text="您可能还喜欢" icon="goods-collect-o" />
+
+          <van-grid column-num="2" gutter="{{ 10 }}" border='{{false}}'>
+            <van-grid-item content-class="card-home card-2" use-slot wx:for="{{ productLikeList }}" wx:for-item="itemLike" wx:for-index="indexLike" wx:key="indexLike" bind:click="gotoProDetail" data-id="{{itemLike.id}}">
+              <image class="page-image-size-xl" mode="aspectFill" src="{{itemLike.banners[0]}}"></image>
+              <view class="product-size-l">
+                <view class="page-size-2">{{itemLike.name}}</view>
+                <view class="page-size-1 page-color-gray">{{itemLike.description}}</view>
+                <view class="page-size-3 page-theme-color">￥{{itemLike.price}}</view>
+              </view>
+            </van-grid-item>
+          </van-grid>
+        </van-grid> -->
+
+
+        <!-- 见底提示 -->
+        <van-divider wx:if="{{isTouchGround}}" contentPosition="center">我是有底线的~</van-divider>
+      </view>
+
+    </view>
+  </view>
+ 
+  <van-submit-bar wx:if="{{orderInfo.payStage !== 3 && orderInfo.status !== 0}}" loading="{{isLoading}}" price="{{ orderInfo.actualPrice }}" button-text="立即支付" bind:submit="onPaySubmit" />
+
+
+</view>

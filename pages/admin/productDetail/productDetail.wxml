@@ -1,0 +1,198 @@
+<!-- index.wxml -->
+<view class="page-1">
+    <!-- 导航栏 -->
+    <navigation color="#000">商品详情</navigation>
+    <view class="header page-position-r" style="margin-top: 180rpx;">
+        <swiper class="swiperBox" indicator-dots="true" circular="true">
+            <block wx:for="{{ productInfo.banners }}" wx:key="indexBanner" wx:for-item="itemBanner">
+                <swiper-item>
+                    <image mode="aspectFill" src="{{ itemBanner }}"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+
+    <view class="page-content page-padding-b-lg">
+        <van-grid column-num="1" border='{{false}}'>
+            <van-grid-item use-slot>
+                <view>
+                    <view class="card-1 page-bj-gray" >
+                        <!-- <view class="priceArea">
+                            <image class="m_icon" src="../../../images/money-rmb.png"></image>
+                            <span class="price">{{productInfo.price}}</span>
+                        </view> -->
+                        <!-- <view class="page-theme-color bold" wx:if="{{productInfo.payType == 2}}">定金：￥<span class="page-size-3">{{productInfo.deposit}}</span></view> -->
+                        <!-- <view class="page-size-2 bold">{{productInfo.name}} {{productInfo.productModelName}}</view> -->
+                        <view class="nameArea">
+                            <view class="signArea">
+                                门店直营
+                            </view>
+                            <view class="name">
+                                {{productInfo.name}} {{productInfo.productModelName}}
+                            </view>
+                            <view class="remainder">
+                                当前剩余：999件
+                            </view>
+                        </view>
+                        <!-- <view class="page-size-1">{{productInfo.description}}</view> -->
+                        <view class="desArea">
+                            <rich-text nodes="{{productInfo.description}}"></rich-text>
+                        </view>
+
+                    </view>
+                    <view class="card-1 page-bj-gray">
+                        <view class="card-top">
+                            <view class="page-size-3 bold">
+                                <van-icon name="hot-o" /> 正品专业
+                            </view>
+                        </view>
+                        <van-grid direction="horizontal" icon-size="20" column-num="4" border="{{false}}">
+                            <van-grid-item content-class="page-bj-gray" wx:for="{{explainList}}" wx:key="indexExplain" wx:for-item="itemExplain" icon="{{itemExplain.icon}}" text="{{itemExplain.title}}" />
+                        </van-grid>
+                    </view>
+                    <!-- <view class="quantityArea">
+                        <view class="title">
+                            数量
+                        </view>
+                        <view class="num">
+                            1件
+                            <image class="select" src="../../../images/selected.png"></image>
+                        </view>
+                    </view> -->
+
+                    <!-- 商品评价 -->
+                    <!-- <view class="card-1 "> -->
+                        <!-- <view class="card-top flex">
+                            <view class="page-size-3 bold">
+                                商品评价
+                            </view>
+
+                            <view class="page-size-1">
+                                1000+条真实评价
+                                <van-icon name="arrow" />
+                            </view>
+                        </view>
+
+                        <view class="card-1 page-bj-gray">
+                            <view class="card-top flex">
+                                <view class="page-size-1">
+                                    <span class="page-size-3 bold"> 100</span><span>% 车主好评</span>
+                                </view>
+                            </view>
+                        </view> -->
+
+                        <!-- 标签 -->
+                        <!-- <view>
+                            <van-tag custom-class="van-tag-custom" wx:for="{{tagList}}" wx:for-index="indexTag" wx:key="indexTag" wx:for-item="itemTag" round plain size="large" color="{{itemTag.isChoose ? '#ff7416' : ''}}" bindtap="handleTag" data-index="{{indexTag}}">{{itemTag.title}} {{itemTag.count}}</van-tag>
+                        </view> -->
+
+                    <!-- </view> -->
+
+                    <!-- 为你推荐 -->
+                    <!-- <view class="card ">
+                        <view class="card-top flex">
+                            <view class="page-size-3 bold">
+                                为您推荐
+                            </view>
+                        </view>
+
+                        <view>
+                            <van-grid column-num="3" border='{{false}}'>
+                                <van-grid-item use-slot wx:for="{{ proRecommendList }}" wx:for-item="itemPro" wx:for-index="indexPro" wx:key="indexPro" bind:click="gotoProDetail" data-id="{{itemPro.id}}">
+                                    <image class="page-image-size-lg" mode="aspectFill" src="{{itemPro.banners[0]}}"></image>
+                                    <view class="product-size-l">
+                                        <view class="page-size-1">{{itemPro.name}}</view>
+                                        <view class="page-color-gray">{{itemPro.description}}</view>
+                                        <view class="page-size-2 page-theme-color">￥{{itemPro.price}}</view>
+                                    </view>
+                                </van-grid-item>
+                            </van-grid>
+                        </view>
+
+                    </view> -->
+
+                </view>
+            </van-grid-item>
+        </van-grid>
+    </view>
+
+    <!-- 立即够买 -->
+
+    <van-goods-action text-class="goodsColor">
+        <van-goods-action-icon icon="chat-o" text="交易须知" bind:click="onClickIcon" />
+        <van-goods-action-button custom-class="goodsColor"  text="{{ productType === 1 ? '立即兑换' : '立即购买' }}" color="#ffe2ab" bind:click="onClickPurchase"
+        />
+        <!-- <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" /> -->
+        <!-- <van-goods-action-button text="立即购买" color="#ffe2ab" bind:click="onClickPurchase" /> -->
+    </van-goods-action>
+
+
+    <!-- isShowPurchase -->
+    <van-popup show="{{isShowPurchase}}" round closeable position="bottom" custom-style="height: 70%" bind:close="onClosePurchase">
+
+        <view class="page-content">
+            <view class="flex">
+                <view class="flex-3">
+                    <image class="page-image-size-lg" src="{{productInfo.banners[0]}}" mode="aspectFill" />
+                </view>
+                <view class="flex-9 page-margin-l-sm">
+                    <!-- <view class="page-theme-color bold"><span class="page-size-1">￥</span><span class="page-size-4">{{productInfo.price}}</span></view> -->
+                    <view class="page-size-2 bold">{{productInfo.name}} {{productInfo.productModelName}}</view>
+                    <rich-text nodes="{{productInfo.description}}"></rich-text>
+                    
+                </view>
+            </view>
+
+            <view class="specifyArea" >
+                <!-- <view class="flex page-margin-y-sm">
+                    <view class="page-size-3 bold">数量</view>
+                </view>
+                <van-stepper value="{{ shoppingNum }}" bind:change="onChangeNum" /> -->
+                <!-- productInfo.type:商品属性 卡券2/车衣1/周边3 -->
+                <view class="sp_title">
+                    规格：
+                </view>
+                <view class="sp_switch" wx:if="{{productInfo.type == 1}}">
+                    <van-switch checked="{{ checked }}" size="20px" active-color="#ffe2ab" bind:change="onChange" />全车
+                </view>
+                <view class="sp_numArea" wx:if="{{productInfo.type == 1}}">
+                    <view class="sp_num"  wx:for="{{productInfo.productSku}}" wx:key="index"
+                    bindtap="selected"
+                    data-key="{{index}}"
+                    style="background-color: {{bgColor[index]}}"
+                    >
+                        <view  wx:if="{{productType == 1}}">
+                            {{item.name}}/{{item.point}}积分
+                        </view >
+                        <view wx:else="{{productType == 0}}">
+                            {{item.name}}/{{item.price/100}}￥
+                        </view>
+                        
+                    </view>
+                </view>
+                <view class="sp_numArea" wx:if="{{productInfo.type !== 1}}">
+                    <view class="sp_num"  wx:for="{{productInfo.productSku}}" wx:key="index"
+                    bindtap="selected2"
+                    data-key="{{index}}"
+                    style="background-color: {{bgColor2[index]}}"
+                    >
+                        <view  wx:if="{{productType == 1}}">
+                            {{item.name}}/{{item.point}}积分
+                        </view >
+                        <view wx:else="{{productType == 0}}">
+                            {{item.name}}/{{item.price/100}}￥
+                        </view>
+                        
+                    </view>
+                </view>
+            </view>
+
+            <van-goods-action>
+                <!-- <van-goods-action-button text="确定" color="#ffe2ab" bind:click="onClickShopping" /> -->
+                <van-goods-action-button text="确定" color="#ffe2ab" bind:click="" />
+
+            </van-goods-action>
+        </view>
+    </van-popup>
+
+</view>

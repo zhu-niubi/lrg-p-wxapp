@@ -1,0 +1,52 @@
+<!-- index.wxml -->
+<view class="page ">
+    <!-- 导航栏 -->
+    <navigation>{{carInfo.id ? '修改车辆信息' : '添加车辆信息'}}</navigation>
+    <view class="page-content" style="height: {{windowHeight}}px;padding-top:{{navbarHeight}}px;">
+        <!--内容部分 -->
+        <view class="card">
+            <ocr-navigator bind:onSuccess="driverSuccess" certificateType="drivingLicense" selectedOptions="{{['plateNum','vehicleType','owner']}}">
+                <button style="background-color: black;" type="primary">行驶证识别</button>
+            </ocr-navigator>
+        </view>
+        <view class="card">
+            <form catchsubmit="formSubmit">
+                <view wx:if="{{!carInfo.id}}" class="information flex">
+                    <view>汽车型号 *：</view>
+                    <view class="input flex" bindtap="changeCar">
+                        <input type="text" value="{{carName ? carName : carInfo.carName}}" name='carId' placeholder="请选择汽车型号" />
+                        <van-icon class="page-size-3 page-color-gray" name="arrow" />
+
+                    </view>
+                </view>
+                <view wx:if="{{!carInfo.id}}" class="information flex">
+                    <view>车牌号 *：</view>
+                    <view class="input flex">
+                        <input type="text" value="{{carInfo.carNumber || plate_num}}" name='carNumber' placeholder="请输入车牌号" />
+                        <van-icon class="page-size-3 page-color-gray" name="arrow" />
+                    </view>
+                </view>
+
+                <view wx:if="{{!carInfo.id}}" class="information flex">
+                    <view>车架号：</view>
+                    <view class="input flex">
+                        <input type="text" value="{{carInfo.VIN || vin}}" name='VIN' placeholder="请输入车架号" />
+                        <van-icon class="page-size-3 page-color-gray" name="arrow" />
+                    </view>
+                </view>
+                <view class="information flex">
+                    <view>颜色 *：</view>
+                    <view class="input flex">
+                        <input type="text" value="{{carInfo.color}}" name='color' placeholder="请输入颜色" />
+                        <van-icon class="page-size-3 page-color-gray" name="arrow" />
+                    </view>
+                </view>
+
+                <!-- 添加按钮 -->
+                <view class="page-footer-1">
+                    <button class="mg-btn primary mg-btn-theme-w" form-type="submit">提交</button>
+                </view>
+            </form>
+        </view>
+    </view>
+</view>

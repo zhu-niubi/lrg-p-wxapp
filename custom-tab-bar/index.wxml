@@ -1,0 +1,6 @@
+<van-tabbar active="{{ active }}" active-color="#ff7416" inactive-color="#000" bind:change="onChange">
+    <van-tabbar-item wx:for="{{list}}" wx:key="index" class="tab-bar-item">
+        <image mode="aspectFit" class="img" src="{{active === index ? item.selectedIconPath : item.iconPath}}"></image>
+        <view class="text" style="color: {{active === index ? selectedColor : color}}">{{item.text}}</view>
+    </van-tabbar-item>
+</van-tabbar>

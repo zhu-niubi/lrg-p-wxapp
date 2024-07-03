@@ -1,0 +1,43 @@
+<!--packageA/caseList/caseList.wxml-->
+<view class="page">
+    <navigation>案例中心</navigation>
+    <view class="header">
+        <view class="tab">
+            <view class="text">
+                <picker mode="selector" range="{{productTypelist}}" range-key="name" value="{{typeIndex}}"
+                        bindchange="pickerChange">
+                    <view>
+                        <text>{{productTypelist[typeIndex].name}}</text>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="tab">
+            <view class="text">
+                <picker mode="selector" range="{{productModelList}}" range-key="name" value="{{modelIndex}}"
+                        bindchange="pickerChangeModel">
+                    <view>
+                        <text>{{productModelList[modelIndex].name}}</text>
+                    </view>
+                </picker>
+            </view>
+        </view>
+
+    </view>
+    <view class="content">
+        <view class="title">
+            热门案例
+        </view>
+        <view style="height: 1rpx;width: 90vw;background-color: #c3c3c3;margin-left: 30rpx;"></view>
+        <view class="caseContent">
+            <van-grid column-num="2" border='{{false}}' center="{{true}}">
+                <van-grid-item use-slot wx:for="{{caseList}}" wx:key="index">
+                    <view class="caseCard" bindtap="gotoCaseDetail" data-item="{{ item }}">
+                        <image class="img" mode="aspectFill" src="{{ item.src[0] }}"></image>
+                        <view class="des"> {{ item.carBrandName }}-{{item.carName}}-{{item.productModelName}}</view>
+                    </view>
+                </van-grid-item>
+            </van-grid>
+        </view>
+    </view>
+</view>

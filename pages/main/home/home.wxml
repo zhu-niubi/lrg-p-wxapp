@@ -1,0 +1,96 @@
+<!-- store.wxml -->
+<view class="page">
+    <view class="header">
+        <!-- 背景图 -->
+        <view class="bgImg" style="background-image: url('{{bgImg}}');">
+            <van-tabs color="#e94a22" wrap-class="tabs" swipeable animated active="{{ active }}">
+                <van-tab wx:for="{{productTypeList}}" wx:key="indexBanner" wx:for-item="itemBanner" title="{{itemBanner.name}}">
+                    <view class="p-a-sm banner">
+                        <image src="{{itemBanner.picture}}" mode="widthFix" />
+                    </view>
+                </van-tab>
+            </van-tabs>
+        </view>
+    </view>
+
+
+    <!-- 内容区域 -->
+    <view class="p-a-sm">
+        <!-- 产品介绍 -->
+        <view class="m-b-sm">
+            <view class="m-y-xs flex">
+                <view class="page-size-3 title_line_left">产品介绍</view>
+                <view class="page-color-gray page-size-1" data-index="0" bindtap="goProductDetailPage">产品列表
+                    <van-icon name="arrow" />
+                </view>
+            </view>
+            <view class="p-y-xs">
+                <view wx:for="{{productFilmList}}" wx:key="indexFilm" wx:for-item="itemFilm" class="p-y-xs"
+                      bindtap="goDetail" data-dImg="{{itemFilm.banners[1]}}"
+                >
+                    <image class="product-img" src="{{itemFilm.banners[0]}}" mode="aspectFill"/>
+                </view>
+            </view>
+        </view>
+        <!-- 案例中心 -->
+        <view class="m-b-sm" data-index="0" bindtap="gotoCaseList">
+            <view class="m-y-xs flex">
+                <view class="page-size-3 title_line_left">案例中心</view>
+                <view class="page-color-gray page-size-1">了解更多
+                    <van-icon name="arrow"/>
+                </view>
+            </view>
+            <view class="p-y-xs">
+                <view class="p-y-xs">
+                    <image class="case-bannerImg" src="{{caseList[0].image}}" mode="aspectFill"/>
+                </view>
+                <view class="flex justify-start">
+                    <view wx:for="{{caseList}}" wx:key="indexCase" wx:for-item="itemCase" class="p-y-xs case">
+                        <image wx:if="{{!itemCase.type}}" class="case-img" src="{{itemCase.image}}" mode="aspectFill" />
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 活动分享 -->
+        <view class="m-b-sm">
+            <view class="m-y-xs flex">
+                <view class="page-size-3 title_line_left">活动分享</view>
+            </view>
+            <view class="p-y-xs">
+                <image class="share-img" src="{{shareImg}}" mode="aspectFill" bindtap="gotoInvitePage"/>
+            </view>
+        </view>
+        <!-- 星级技师 -->
+        <view class="m-b-sm">
+            <view class="m-y-xs flex">
+                <view class="page-size-3 title_line_left">星级技师</view>
+                <view class="page-color-gray page-size-1" data-index="0" bindtap="gotoTechnicianDetails">了解更多
+                    <van-icon name="arrow" />
+                </view>
+            </view>
+            <view class="p-y-xs">
+                <image class="share-img" src="{{isShowTechnician ? technicianOpenImg : technicianImg}}" mode="widthFix" bindtap="onClickTech" />
+            </view>
+        </view>
+        <!-- 品牌故事 -->
+        <view class="m-b-sm" wx:if="{{brandVideo}}">
+            <view class="m-y-xs flex">
+                <view class="page-size-3 title_line_left">品牌故事</view>
+                <view class="page-color-gray page-size-1" data-index="0">了解更多
+                    <van-icon name="arrow" />
+                </view>
+            </view>
+            <view>
+                <video class="brand-story" custom-cache="{{false}}" binderror="binderror" referrer-policy='origin' src="{{brandVideo}}"></video>
+            </view>
+        </view>
+    </view>
+
+    <!-- footer -->
+    <view class="p-a-xs m-b-xl">
+        <image class="footer-img" bindtap="footerPreviewImage" src="{{footerImg}}" mode="widthFix" />
+    </view>
+
+    <!-- 见底提示 -->
+    <van-divider wx:if="{{isTouchGround}}" contentPosition="center">我是有底线的~</van-divider>
+</view>

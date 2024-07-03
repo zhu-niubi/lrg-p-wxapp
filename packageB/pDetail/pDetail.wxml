@@ -1,0 +1,14 @@
+<!--packageB/pDetail/pDetail.wxml-->
+<view class="page">
+    <!-- 内容区域 -->
+        <navigation color='black'/>
+        <!-- 产品介绍 -->
+        <view wx:if="{{dImg}}">
+            <image style="width: 750rpx;" src="{{dImg}}" mode="widthFix"/>
+        </view>
+        <view style="text-align: center;margin-top: 200rpx; background-color: #fff;" wx:else="{{ dImg == null}}">
+            <text>
+                抱歉，该产品暂无详情~~~
+            </text>
+        </view>
+</view>

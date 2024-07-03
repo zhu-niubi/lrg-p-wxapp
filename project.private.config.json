@@ -1,0 +1,86 @@
+{
+    "projectname": "ngj-wxapp",
+    "setting": {
+        "compileHotReLoad": true,
+        "urlCheck": false,
+        "bigPackageSizeSupport": true
+    },
+    "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+    "libVersion": "2.14.1",
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "案例中心",
+                    "pathName": "packageA/caseList/caseList",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "施工单",
+                    "pathName": "pages/admin/construction/construction",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "NFC质保查询中间识别页",
+                    "pathName": "pages/admin/NFCWarranty/NFCWarranty",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "商城",
+                    "pathName": "pages/main/store/store",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "技师模块",
+                    "pathName": "pages/admin/technicianDetails/technicianDetails",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "技师详情",
+                    "pathName": "packageA/engineerDetail/engineerDetail",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "评判规则",
+                    "pathName": "packageA/evaluationRules/evaluationRules",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "消费券",
+                    "pathName": "packageA/consumerCoupon/consumerCoupon",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "商品详情",
+                    "pathName": "pages/admin/productDetail/productDetail",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "蓝牙",
+                    "pathName": "packageA/blueTooth/blueTooth",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

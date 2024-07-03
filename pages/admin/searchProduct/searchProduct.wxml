@@ -1,0 +1,35 @@
+<!-- myCard.wxml -->
+<view class="page-1 page-padding-b-sm ">
+  <!-- 导航栏 -->
+  <!-- <navigation>搜索</navigation> -->
+
+  <view class="page-top-search page-position-fixed-t page-1">
+    <view class="flex">
+      <van-icon name="arrow-left" class="flex-1 page-size-4 page-margin-t-xl" bind:click="onClickLeft" />
+      <van-search class="flex-11" custom-class="vant-custom" value="{{ searchVal }}" shape="round" placeholder="请输入您喜欢的商品" bind:search="onFilterChange" data-name="searchVal" />
+    </view>
+
+    <van-dropdown-menu active-color=" #ff7416">
+      <van-dropdown-item value="{{ proTypeValue }}" options="{{ proTypeOption }}" bind:change="onFilterChange" data-name="proTypeValue" />
+      <van-dropdown-item value="{{ proPriceValue }}" options="{{ proPriceOption }}" bind:change="onFilterChange" data-name="proPriceValue" />
+    </van-dropdown-menu>
+  </view>
+
+  <!--内容部分 -->
+  <view style="padding-top:{{navbarHeight}}px;" class="page-margin-y-md"> </view>
+  <view class="page-padding-b-md page-padding-t-sm-1">
+    <van-grid column-num="2" gutter="{{ 10 }}" border='{{false}}'>
+      <van-grid-item content-class="card-home card-2" use-slot wx:for="{{ productList }}" wx:for-item="itemPro" wx:for-index="indexPro" wx:key="indexPro" bind:click="gotoProDetail" data-id="{{itemPro.id}}">
+        <van-image width="300rpx" height="300rpx" fit="cover" src="{{itemPro.banners[0]}}" />
+        <view class="product-size-l">
+          <view class="page-size-2">{{itemPro.name}}</view>
+          <view class="page-size-1 page-color-gray">{{itemPro.description}}</view>
+          <view class="page-size-3 page-theme-color">￥{{itemPro.price}}</view>
+        </view>
+      </van-grid-item>
+    </van-grid>
+  </view>
+
+  <!-- 见底提示 -->
+  <van-divider wx:if="{{isTouchGround}}" contentPosition="center">我是有底线的~</van-divider>
+</view>

@@ -1,0 +1,4 @@
+<!--pages/main/configModel/configModel.wxml-->
+<view class="page">
+    <web-view src='https://test.nkdfilm.api.nkodapu.com' binderror="binderror"/>
+</view>

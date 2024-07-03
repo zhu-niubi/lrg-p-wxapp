@@ -1,0 +1,27 @@
+{
+  "name": "ngj-wxapp",
+  "version": "1.0.0",
+  "description": "纳管家小程序",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.nalinv.group/pengxiaoyan/ngj-wxapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.22.15",
+    "@miniprogram-component-plus/tabs": "^1.0.0",
+    "@vant/weapp": "^1.10.3",
+    "buffer": "^6.0.3",
+    "crypto-js": "^4.1.1",
+    "iconv-lite": "^0.6.3",
+    "save": "^2.9.0",
+    "string_decoder": "^1.3.0",
+    "weui-miniprogram": "^1.2.3",
+    "wxmp-rsa": "^2.1.0"
+  }
+}

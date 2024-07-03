@@ -1,0 +1,7 @@
+/**index.wxss**/
+.swiper-item {
+  height: 100%;
+  background: no-repeat 50% 50%;
+
+  background-size: cover;
+}

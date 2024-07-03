@@ -1,0 +1,172 @@
+<!-- myCard.wxml -->
+<view class="page">
+  <!-- 导航栏 -->
+  <navigation>确认订单</navigation>
+  <!-- 内容 -->
+  <view class="top-card" style="{{bgImg}}">
+    <view class="page-top-padding" style="padding-top:{{navbarHeight}}px;"> </view>
+    <view class="page-position page-position-t-sm page-padding-b-lg">
+      <!-- 商品 -->
+      <view class="card">
+        <!-- <view class="page-size-3 bold">商品</view> -->
+        <view class="flex page-margin-y-xs" >
+          <view class="flex-3">
+            <image class="productImg" src="{{productInfo.banners[0]}}" mode="aspectFill" />
+          </view>
+          <view class="flex-9 page-margin-l-sm clear-float">
+            <view class="nameArea">{{productInfo.name}} {{productInfo.productModelName}}</view>
+            <view class="desArea">
+              规格：{{s_status == 1 ? skuList[0].skuName : skuName}}
+            </view>
+            <!-- <view class="pnum">
+              商品数量：{{shoppingNum}}
+            </view> -->
+          </view>
+        </view>
+        <view class="listSkuArea">
+          <view class="icon_sku" wx:if="{{skuList.length > 1}}" bindtap="moreSku">
+            更多<van-icon name="{{moreSku ? 'arrow-up' : 'arrow-down'}}" />
+          </view>
+          <view  wx:if="{{moreSku}}" >
+            <view class="flex page-margin-y-xs" wx:for="{{skuList}}" wx:key="index" wx:if="{{index > 0}}">
+              <view class="flex-3">
+                <image class="productImg" src="{{productInfo.banners[0]}}" mode="aspectFill" />
+              </view>
+              <view class="flex-9 page-margin-l-sm clear-float">
+                <view class="nameArea">{{productInfo.name}} {{productInfo.productModelName}}</view>
+                <view class="desArea">
+                  规格：{{item.skuName}}
+                </view>
+                <!-- <view class="pnum">
+                  商品数量：{{shoppingNum}}
+                </view> -->
+              </view>
+            </view>
+            
+          </view>
+        </view>
+        
+      </view>
+
+      <!-- 订单明细 -->
+      <view class="card">
+        <view class="page-size-3 bold">订单明细</view>
+        <view class="flex page-margin-y-md">
+          <view class="page-color-gray">
+            商品总额
+            <van-icon name="cash-o" />
+          </view>
+          <!-- <view class="bold">{{productType == 1 ? '积分'+point : '在线支付'+price}}</view> -->
+          <view class="bold">
+            ￥{{price || productInfo.totalPrice}}
+          </view>
+        </view>
+
+        <!-- <view wx:if="{{productInfo.deposit}}" class="flex page-margin-y-md">
+          <view class="page-color-gray">定金</view>
+          <view class="bold"><span class="page-color-gray">x{{shoppingNum}}</span> ￥{{productInfo.deposit}}</view>
+        </view>
+
+        <view wx:if="{{productInfo.deposit}}" class="flex page-margin-y-md">
+          <view class="page-color-gray">
+            <view>尾款</view>
+            <view class="page-size-1 page-color-black">支付尾款时间：{{productInfo.payBalanceAt}}</view>
+          </view>
+          <view class="bold">￥{{productInfo.finalPrice}}</view>
+        </view> -->
+
+        <!-- <view class="flex page-margin-y-md">
+          <view class="page-color-gray">
+            优惠券<van-icon name="coupon-o" />
+          </view>
+          <view class="page-color-gray">
+            无可用优惠券<van-icon name="arrow" />
+          </view>
+        </view> -->
+        <view class="flex page-margin-y-md" wx:if="{{productType == 0}}">
+          <view class="page-color-gray">
+            积分抵扣<span style="font-size: 15rpx;">(共{{myPoint}}积分)</span>
+          </view>
+          <van-cell-group>
+            <van-field
+              type="number"
+              value="{{usePoint}}"
+              bind:input="inputPoint"
+              border="{{ false }}"
+            />
+            
+          </van-cell-group>
+          <van-button size="mini" round bindtap="calculatePoint">确认</van-button>
+          <!-- <van-icon name="edit" /> -->
+
+        </view>
+        <view class="flex page-margin-y-md">
+          <view class="page-color-gray">
+            优惠金额
+            <van-icon name="after-sale" />
+          </view>
+          <view class="page-color-black">
+            <view class="bold">减{{productType == 0 ? discountedPrice : price}}￥</view>
+          </view>
+        </view>
+
+      </view>
+
+
+      <!-- 支付方式 -->
+      <view class="card">
+        <view class="flex">
+          <view class="page-size-3 bold">支付方式</view>
+          <view>{{productType == 1 ? '积分支付' : '在线支付'}}</view>
+        </view>
+
+        <view class="page-margin-y-md">
+          <view class="flex">
+            <view class="page-size-3 bold">
+              {{productType == 1 ? '消耗积分':'消费金额'}}
+            </view>
+
+            <view>{{productType == 0 ? price-discountedPrice : point}}</view>
+          </view>
+        </view>
+
+        <view class="page-margin-y-md">
+          <view class="flex">
+            <view class="page-size-3 bold">
+              开发票
+            </view>
+            <view style="font-size: 24rpx;">
+              本次无需开发票
+            </view>
+          </view>
+          <!-- <view class="page-color-gray page-size-1">申请订单后可在订单详情查看发票信息</view> -->
+        </view>
+
+        <view class="flex page-margin-b-xs">
+          <span class="page-size-3 bold flex-2">备注</span>
+          <input class="page-inline-block page-img-level-text flex-10" type="" placeholder="请输入备注~" type="text" />
+        </view>
+      </view>
+
+      <!-- 提交订单 -->
+      <view class="orderPutArea">
+        <view class="payNum">
+          合计：
+            <block wx:if="{{ productType == 1 }}">
+              <van-icon name="points" />
+              {{ point }}
+            </block>
+            <block wx:else>
+              ￥{{ (price === null ? productInfo.totalPrice : price)-discountedPrice }}
+            </block>
+        </view>
+        <view class="submit" bindtap="onSubmit">
+          提交订单
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- {{productType == 1 ? '消耗积分':'消费金额'}} -->
+  <!-- <van-submit-bar currency loading="{{isLoading}}" price="{{productType == 1 ?productInfo.point : productInfo.actualPrice }}" button-text="提交订单" bind:submit="onSubmit" /> -->
+
+</view>

@@ -1,0 +1,44 @@
+.page-content {
+  padding: 0 30rpx;
+}
+
+.car-centent {
+  padding-bottom: 10rpx;
+}
+
+.car-centent>view {
+  margin-bottom: 8rpx;
+}
+
+.car-footer {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10rpx 0rpx 40rpx 0rpx;
+  margin: 0 auto;
+}
+
+.car-footer button {
+  /* width: 600rpx !important; */
+  color: #fff;
+  /* padding: 20rpx; */
+}
+
+
+.text {
+  color: gray;
+  line-height: 48rpx;
+  text-align: right;
+}
+
+.text button {
+  transform: rotate(180deg)
+}
+
+
+.wx-switch-input {
+  zoom: 0.8;
+  vertical-align: middle;
+}

@@ -1,0 +1,67 @@
+<view class="page page-height-xl">
+  <image class="background" src="{{warrantBgImg}}" mode="aspectFill" />
+  <navigation />
+  <view class="content-container">
+    <view class="result-container">
+      <view class="content-row">
+        <text class="label">车主姓名：</text>
+        <text class="value">{{ constructionInfo.userName }}</text>
+      </view>
+      <view class="content-row">
+        <text class="label">车辆名称：</text>
+        <text class="value">{{ constructionInfo.carBrandName}}--{{constructionInfo.carName}}</text>
+      </view>
+      <view class="content-row">
+        <text class="label">车辆牌号：</text>
+        <text class="value">{{ constructionInfo.carNumber}}</text>
+      </view>
+      <view class="content-row">
+        <text class="label">车架号码：</text>
+        <text class="value">{{ constructionInfo.VIN}}</text>
+      </view>
+      <view class="content-row">
+        <text class="label">施工门店：</text>
+        <text class="value">{{ constructionInfo.storeName }}</text>
+      </view>
+      <view class="content-row">
+        <text class="label">施工单号：</text>
+        <text class="value">{{ constructionInfo.code }}</text>
+      </view>
+      <view class="content-row">
+        <text class="label">施工日期：</text>
+        <text class="value">{{ constructionInfo.expectComplete}}</text>
+      </view>
+      <!-- <view class="content-row">
+        <text class="label">质保截止：</text>
+        <text class="value">{{ constructionInfo.deadline}}</text>
+      </view> -->
+      <view class="productSeriesArea" wx:for="{{constructionInfo.newconstructionSku}}" wx:for-item="seriesItem" wx:key="index">
+        <view class="productSeriesName">
+          <text class="label">产品系列：</text>
+          <text class="value" style="margin-left: 24rpx;">{{ seriesItem.productModelName }}</text>
+        </view>
+        <view class="productName">
+          <text class="label">产品名称：</text>
+          <text class="value" style="margin-left: 24rpx;">{{ seriesItem.productName }}</text>
+          <text class="label" style="margin-left: 30rpx;">质保年限：</text>
+          <text class="value" style="margin-left: 24rpx;">{{ seriesItem.warrantyYear }}</text>
+          <van-icon style="margin-left: 50rpx;" name="arrow-down" wx:if="{{!showplace}}" bindtap="showplace" data-value="{{showplace}}"/>
+          <van-icon style="margin-left: 50rpx;" name="arrow-up" wx:if="{{showplace}}" bindtap="showplace" data-value="{{showplace}}"/>
+
+        </view>
+        <view class="placeArea" wx:if="{{showplace}}" wx:for="{{seriesItem.productPosition}}" wx:for-item="placeItem" wx:key="index">
+            <view class="placeName">
+              部位：{{placeItem.productSkuName}}
+            </view>
+            <view class="rollNum">
+              膜卷号：{{placeItem.rollNumber}}
+            </view>
+        </view>
+      </view>
+      
+
+
+
+    </view>
+  </view>
+</view>

@@ -1,0 +1,41 @@
+<!--pages/admin/technicianDetails/technicianDetails.wxml-->
+<view class="page">
+    <image class="background" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/fe5ae537405d6678f5298745012d175.png" mode="aspectFill" />
+    <navigation/>
+    <view class="content-1">
+        <view class="title">
+            星级技师
+        </view>
+        <view class="des_title">
+            NKD
+        </view>
+        <view class="des_content">
+            “王者团队 七星呵护
+        </view>
+        <view class="des_content2">
+            星级匠人 熟练掌握复杂车型施工技巧”
+        </view>
+        <view class="des_content3">
+            下滑更多
+        </view>
+        <image class="icon_img" mode="aspectFit" width src="../../../images/bottom.png" />
+        <view class="rule_title">
+            星级技师最新评审规则
+        </view>
+        <image class="rule_img" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/banner-bg.png" mode="aspectFit"></image>
+        <image class="rule_btn" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/8892.png" mode="aspectFit" bindtap="gotoRules"></image>
+        <view class="engineer_title">
+            技师风采
+        </view>
+        <swiper class="engineer_swiper" indicator-dots="{{ false }}" easing-function="easeInOutCubic" previous-margin="130rpx" next-margin="130rpx" circular="{{false}}">
+            <view wx:for="{{allStarList}}" wx:key="index">
+                <swiper-item class="swiper-item" bindtap="gotoEngineerDetail" data-id="{{ item.id }}">
+                    <image class="cover" src="{{item.image}}" mode="aspectFill"></image>
+                </swiper-item>
+            </view>
+        </swiper>
+        <image class="skill" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/skill.png" mode="aspectFill"></image>
+        <image class="logo" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/NKODAlogo.png" mode="aspectFit"></image>
+    </view>
+
+</view>

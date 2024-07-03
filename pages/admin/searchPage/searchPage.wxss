@@ -1,0 +1,17 @@
+.van-search__content {
+  background-color: var(--search-background-color, rgba(0, 0, 0, 0.3)) !important;
+}
+
+.vant-custom {
+  padding: 100rpx 230rpx 10rpx 30rpx !important;
+}
+
+
+/* .scroll-view_H {
+  white-space: nowrap;
+} */
+
+
+.scroll-view_H {
+  white-space: nowrap;
+}

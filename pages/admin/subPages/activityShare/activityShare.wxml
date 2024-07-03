@@ -1,0 +1,102 @@
+<view>
+    <!-- 导航栏 -->
+    <navigation>活动分享</navigation>
+    <view class="position-relative">
+        <view class="position-relative">
+            <image class="invite-img" src="{{inviteBgImg}}" mode="widthFix">
+            </image>
+
+            <view class="flex-around share" wx:if="{{isLogin}}">
+                <van-button color="#e94a22" open-type="share" custom-class="p-x-md" size="small">微信分享</van-button>
+                <van-button color="#f5f5f5" custom-class="p-x-md font-color-black" size="small" bind:click="handleMito">生成海报</van-button>
+            </view>
+
+        </view>
+
+        <view wx:if="{{isLogin}}" class="page-position-1 content m-b-xl">
+            <view class="page-content ">
+                <view class="share-img m-b-sm">
+                    <image src="{{nShareImg}}" mode="widthFix"></image>
+                </view>
+                <view class="share-img position-relative">
+                    <image src="{{myAwardImg}}" mode="widthFix"></image>
+                    <view class="award">
+                        <view class="theme-color award-title flex">
+                            <view class="page-size-4 page-size-oblique number">{{totalNumber}}</view>
+                            <view class="page-size-4 page-size-oblique">{{totalSuccess}}</view>
+                        </view>
+                    </view>
+                </view>
+                <!-- <view class="card page-text-align-center bg-card">
+                    <view class="flex-evenly">
+                        <view class="title_line_left line"></view>
+                        <view>纳分享 有好礼</view>
+                        <view class="title_line_right line"></view>
+                    </view>
+                    <van-grid column-num="4" border="{{ false }}" custom-class="page-padding-y-md">
+                        <van-grid-item wx:for="{{ stepsList }}" wx:for-item="itemSteps" wx:for-index="indexSteps" wx:key="indexSteps" text="{{itemSteps.title }}" icon="{{itemSteps.icon}}" />
+                    </van-grid>
+                </view> -->
+
+                <!-- <view class="card page-text-align-center">
+                    <view class="flex-evenly">
+                        <view class="title_line_left line"></view>
+                        <view>我的奖励</view>
+                        <view class="title_line_right line"></view>
+                    </view>
+                    <van-grid column-num="2" border="{{ false }}" custom-class="page-padding-y-md">
+                        <van-grid-item use-slot>
+                            <view class="award">
+                                <view class="theme-color award-title">
+                                    <span class="page-size-4 page-size-oblique">{{totalNumber}}</span>
+                                </view>
+                                <view class="page-size-2 award-text">成功介绍</view>
+                            </view>
+                        </van-grid-item>
+                        <van-grid-item use-slot>
+                            <view class="award">
+                                <view class="theme-color award-title">
+                                    <span class="page-size-4 page-size-oblique">{{totalSuccess}}</span>
+                                </view>
+                                <view class="page-size-2 award-text">获得优惠券</view>
+                            </view>
+                        </van-grid-item>
+                    </van-grid>
+                </view> -->
+            </view>
+            <!-- 活动须知 -->
+            <view class="inform">
+                <view class="share-img">
+                    <image src="{{noticeImg}}" mode="widthFix"></image>
+                </view>
+            </view>
+        </view>
+
+        <view wx:else class="page-content page-text-align-center m-b-xl">
+            <view class="page-margin-y-lg">
+                <van-button color="#002e9b" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">立即登录{{recommenderId ? "领取" : "/注册"}}</van-button>
+            </view>
+
+            <view class="card page-text-align-center">
+                <view class="flex-evenly">
+                    <view class="title_line_left line"></view>
+                    <view>新人首单专享</view>
+                    <view class="title_line_right line"></view>
+                </view>
+                <van-grid column-num="3" gutter="{{ 10 }}" border='{{false}}'>
+                    <van-grid-item content-class="card-home page-position-r" use-slot wx:for="{{ productCouponList }}" wx:for-item="itemPro" wx:for-index="indexPro" wx:key="indexPro" bind:click="gotoProDetail" data-id="{{itemPro.id}}">
+                        <image class="page-image-size-md" mode="aspectFill" src="{{itemPro.banners[0]}}"></image>
+                        <view class="product-size-l">
+                            <view class="page-size-2">{{itemPro.name}}</view>
+
+                            <view class="page-size-3 page-theme-color">￥{{itemPro.price}}</view>
+                        </view>
+                    </van-grid-item>
+                </van-grid>
+            </view>
+
+        </view>
+
+        <share-box wx:if="{{isCanDraw}}" isCanDraw="{{isCanDraw}}" bannerImg="{{inviteBgImg}}" background="{{mitoBackground}}" generateQrcode="{{generateQrcode}}" textData="{{shareTextData}}"  bind:initData="handleClose" />
+    </view>
+</view>

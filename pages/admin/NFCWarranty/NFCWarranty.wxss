@@ -1,0 +1,55 @@
+/* pages/admin/NFCWarranty/NFCWarranty.wxss */
+.page {
+    width: 100%;
+    /* height: 100vh; */
+
+}
+.page .content {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    background-size: contain;
+}
+.content .gif{
+    position:absolute;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: blanchedalmond; */
+    width: 100%;
+    height: 40vh;
+}
+.content .gif .img {
+    border-radius: 150rpx;
+    /* width: 200rpx;
+    height: 200rpx; */
+}
+
+.content .textArea {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+    width: 100%;
+    height: 250rpx;
+    bottom: 40rpx;
+    color: #686868;
+
+}
+
+.textArea .textTitle {
+    letter-spacing: 5rpx;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    font-weight: bold;
+}
+.textArea .textContent {
+    margin-top: 30rpx;
+    width: 90%;
+    font-size: 22rpx;
+    line-height: 1.5;
+    letter-spacing: 3rpx;
+}

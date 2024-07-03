@@ -1,0 +1,23 @@
+<view class="page">
+    <!-- 导航栏 -->
+    <navigation>定损记录</navigation>
+    <view style="padding-top:{{navbarHeight}}px;">
+        <view class="card" wx:if="{{lossAssessmentList.length > 0}}">
+            <view class="table">
+                <view class="tr">
+                    <view class="th">定损时间</view>
+                    <view class="th">定损部位</view>
+                    <view class="th">备注</view>
+                </view>
+                <view class="tr" wx:for="{{lossAssessmentList}}" wx:key="index">
+                    <view class="td">{{item.createdAt}}</view>
+                    <view class="td">{{item.productPosition}}</view>
+                    <view class="td">{{item.memo}}</view>
+                </view>
+            </view>
+        </view>
+    
+    </view>
+
+
+</view>

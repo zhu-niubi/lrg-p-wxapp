@@ -1,0 +1,27 @@
+<!--pages/admin/NFCWarranty/NFCWarranty.wxml-->
+<view class="page">
+    <view class="content" style="background-image : url( 'http://backend-ngj.oss-cn-shanghai.aliyuncs.com/Warranty.png' );">
+        <view class="gif">
+            <image class="img" mode="aspectFill" src="{{bgImgGif}}"></image>
+        </view>
+        <view class="textArea">
+            <view class="textTitle">
+                使用说明:
+            </view>
+            <view class="textContent">
+                <view class="p">
+                    1.适用于支持NFC功能的手机查询（iphone手机暂不支持NFC）。
+                </view>
+                <view class="p">
+                    2.只限于在纳管家门店施工的车辆查询质保信息。
+                </view>
+                <view class="p">
+                    3.如果查询不到质保数据，请检查手机是否支持NFC功能,并且确保纳管家门店是否录入质保数据，确认无误后再次查询。
+                </view>
+                
+                
+                
+            </view>
+        </view>
+    </view>
+</view>

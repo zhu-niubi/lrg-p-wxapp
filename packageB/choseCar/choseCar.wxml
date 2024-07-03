@@ -1,0 +1,17 @@
+<view class="page">
+	<!-- 导航栏 -->
+	<navigation>{{carBrandName}}</navigation>
+	<view class="page-content" style="padding-top:{{navbarHeight}}px;">
+		<!-- 车辆信息 -->
+		<block wx:if="{{ showLoading }}">
+			<view class="loading">拼命加载中</view>
+		</block>
+		<block wx:else>
+			<view class="card page-content-1" catchtap="jump" wx:for="{{ carTypeList }}" wx:key="index" data-id="{{ item.id }}" data-name="{{ item.name }}">
+				<view>
+					<text>{{ item.name }}</text>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>

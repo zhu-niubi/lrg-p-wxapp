@@ -1,0 +1,55 @@
+.card-coupons {
+  position: relative;
+  margin-top: 30rpx;
+  height: 200rpx;
+  position: relative;
+  background: #eee;
+  border-radius: 15rpx;
+}
+
+.card-coupons::before {
+  content: '';
+  height: 80px;
+  border: 1px dashed #fff;
+  position: absolute;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
+
+.card-coupons-content .span {
+  position: absolute;
+  left: 20rpx;
+  bottom: 20rpx;
+  font-size: 24rpx;
+  color: #555;
+}
+
+.card-coupons-icon {
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  width: 110rpx;
+  height: 110rpx;
+}
+
+
+
+.canvas {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+
+.isMask {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+}

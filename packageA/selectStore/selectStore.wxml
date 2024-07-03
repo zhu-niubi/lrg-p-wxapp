@@ -1,0 +1,68 @@
+<!--pages/selectStore/selectStore.wxml-->
+<view class="container">
+
+    <view class="bg-ededed">
+        <!-- <navigation backgroud>门店选择</navigation> -->
+        <van-nav-bar />
+        <!-- 查询 -->
+        <view>
+            <van-search value="{{ value }}" placeholder="请输入门店关键词" use-left-icon-slot bind:search="onSearchStore">
+                <view bindtap="bindAddress" slot="left-icon">
+                    <van-icon name="location-o" />
+                    <span>{{address}}</span>
+                </view>
+            </van-search>
+        </view>
+        <view>
+            <van-popup show="{{ show }}" round position="bottom" custom-style="height: 50%" bind:close="onClose">
+                <view class="query">
+                    <view class="area">省级：</view>
+                    <picker range="{{province}}" value='{{provinceIndex}}' bindchange="bindProvinceChange" range-key="label">
+                        <input class="pk" disabled="true" value="{{province[provinceIndex]['label']}}" placeholder='请选择省'></input>
+                    </picker>
+                    <view class="icon-arrow"></view>
+                </view>
+                <view class="query">
+                    <view class="area">市级：</view>
+                    <picker range="{{town}}" value='{{townIndex}}' bindchange="bindTownChange" range-key="label">
+                        <input class="pk" disabled="true" value="{{town[townIndex]['label']}}" placeholder='请选择市'></input>
+                    </picker>
+                    <view class="icon-arrow"></view>
+                </view>
+                <view class="query">
+                    <view class="area">区级：</view>
+                    <picker range="{{district}}" value='{{districtIndex}}' bindchange="bindDistrictChange" range-key="label">
+                        <input class="pk" disabled="true" value="{{district[districtIndex]['label']}}" placeholder='请选择区'></input>
+                    </picker>
+                    <view class="icon-arrow"></view>
+                </view>
+                <button class="btn" bindtap="bindStoreList">查 询</button>
+            </van-popup>
+
+
+        </view>
+
+        <view class="viewDetail" wx:if='{{nearList.length}}'>
+            <view class="viewTit">
+                <view class="vi1 text-center">门店列表</view>
+            </view>
+            <view class="viewStore" wx:for="{{nearList}}" wx:key='index' wx:for-item="item">
+                <view class="nearList">
+                    <view class="info" bindtap="goStore" data-name="{{item.name}}" data-region="{{item.regionName}}" data-address="{{item.fullAddress}}" data-id="{{item.id}}">
+                        <text>{{item.name}}</text>
+                        <text>{{item.regionName}}{{item.fullAddress}}</text>
+                        <!-- <text>{{item.lat}}||{{item.lon}}</text> -->
+                    </view>
+
+                    <!-- <view class="dis" bindtap="goThtre" data-lat="{{item.lat}}" data-lon="{{item.lon}}"> -->
+                    <view class="dis" bindtap="goStore" data-name="{{item.name}}" data-region="{{item.regionName}}" data-address="{{item.fullAddress}}" data-id="{{item.id}}">
+                        <text>{{item.straightLine}}km</text>
+                        <!-- <van-icon name="guide-o" /> -->
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </view>
+
+</view>

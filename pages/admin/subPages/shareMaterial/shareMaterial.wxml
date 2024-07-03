@@ -1,0 +1,42 @@
+<!--pages/admin/putMaterial/putMaterial.wxml-->
+<view class="page page-padding-y-md background" style="background-image: url('{{inviteBgImg}}');">
+    <navigation>案例分享</navigation>
+    <view class="shareTitle title">
+        {{constructionInfo.carName}}
+        <view class="time">
+            施工时间：{{constructionInfo.createdAt}}
+        </view>
+    </view>
+    <view class="content box-sizing-box">
+        <view class="title">
+            车辆参数:
+        </view>
+        <view class="desc">
+            <van-field label="车辆品牌" model:value="{{constructionInfo.carBrandName}}" border="{{ true }}" input-align="center" focus="{{ true }}" disabled custom-class="parameter"/>
+            <van-field label="车型" model:value="{{constructionInfo.carName}}" border="{{ true }}" input-align="center" focus="{{ true }}" disabled />
+            <van-field label="门店" model:value="{{constructionInfo.storeName}}" border="{{ true }}" input-align="center" focus="{{ true }}" disabled />
+        </view>
+
+        <view class="tt" wx:for="{{constructionInfo.constructionSku}}" wx:key="indexProType" wx:for-item="itemProType">
+            <!-- <view class="title">
+                {{itemProType.productTypeName}}外观:
+            </view> -->
+            <view class="desc">
+                <van-field label="产品类型" model:value="{{itemProType.productTypeName}}" border="{{ true }}" input-align="center" focus="{{ true }}" disabled />
+                <van-field label="产品系列" model:value="{{itemProType.productModelName}}" border="{{ true }}" input-align="center" focus="{{ true }}" disabled />
+            </view>
+            <view class="information">
+                <van-image wx:for="{{itemProType.src}}" wx:for-item="itemShare" wx:for-index="{{indexShare}}" wx:key="indexShare" width="100%" height="389rpx" fit="cover" src="{{itemShare}}" bindtap="previewImage" data-url="{{itemShare}}" data-list="{{itemProType.src}}" />
+            </view>
+        </view>
+
+    </view>
+    <view class="submit">
+        <van-button color="#e94a22" round open-type="share" custom-class="padding-50" size="small">微信分享 <image class="share-btn" src="/images/shareBtn-1.jpg"></image>
+        </van-button>
+        <van-button color="#1d1d1d" round plain custom-class="padding-50" size="small" bind:click="handleMito">生成海报<image class="share-btn" src="/images/shareBtn-2.jpg"></image>
+        </van-button>
+    </view>
+
+    <share-box wx:if="{{isCanDraw}}" isCanDraw="{{isCanDraw}}" bannerData="{{bannerData}}" background="{{sharePosterBg}}" generateQrcode="{{generateQrcode}}" textData="{{shareTextData}}" bind:initData="createShareImage" />
+</view>

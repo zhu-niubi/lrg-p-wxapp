@@ -1,0 +1,18 @@
+<!-- myCard.wxml -->
+<view class="page-1 page-position-r" style="height: {{windowHeight}}px;">
+  <!-- 导航栏 -->
+  <navigation></navigation>
+  <!-- 内容 -->
+  <!-- <view style="padding-top:{{navbarHeight}}px;"> </view> -->
+  <view class="page-content page-position-x">
+
+    <view class="page-text-align-center ">
+      <icon type="success" size="93"></icon>
+      <view class="page-size-3 page-margin-y-md">支付成功</view>
+
+      <van-button bind:click="gotoDetail" round>
+        查看详情
+      </van-button>
+    </view>
+  </view>
+</view>

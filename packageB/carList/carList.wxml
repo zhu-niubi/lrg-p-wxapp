@@ -1,0 +1,38 @@
+<!-- <view></view> -->
+<view class="page">
+    <!-- 导航栏 -->
+    <navigation>汽车品牌</navigation>
+    <block>
+        <view style="height: {{windowHeight}}px; padding-top:{{navbarHeight}}px;">
+            <!-- 车辆信息 -->
+            <block wx:if="{{ showLoading }}">
+                <view class="loading">拼命加载中</view>
+            </block>
+            <block wx:else>
+                <!--内容部分 -->
+                <scroll-view scroll-y scroll-into-view="{{ scroll }}">
+                    <view class="alphabet" class="page-padding-b-lg">
+                        <view class="alphabet-list">
+                            <view wx:for="{{ carBrandList }}" wx:key="unique" id="{{ item.alphabet }}" class="section-item">
+                                <view class="section-item-header">
+                                    {{ item.alphabet }}
+                                </view>
+                                <view wx:for="{{ item.datas }}" wx:key="index" wx:for-item="cell" wx:for-index="cellIndex" class="section-item-cells" bindtap="handleToCarType" data-id="{{ cell.id }}" data-name="{{ cell.name }}">
+                                    <image src="{{ cell.image }}"></image>
+                                    <text>{{ cell.name }}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="nav {{ touchmove == 1 ? 'touchmove' : '' }}" catchtouchstart="touchstart" catchtouchmove="touchmove" catchtouchend="touchend">
+                        <view id="nav_item" wx:for="{{ carBrandList }}" wx:key="index" data-initial="{{ item.alphabet }}">
+                            {{ item.alphabet }}
+                        </view>
+                    </view>
+                </scroll-view>
+            </block>
+        </view>
+
+        <view class="hint_bok" hidden="{{ hiddenn }}">{{ nav_text }}</view>
+    </block>
+</view>

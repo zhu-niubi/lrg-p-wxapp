@@ -1,0 +1,105 @@
+.page {
+    width: 100%;
+}
+.page .content {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tickets {
+    margin-top: 70rpx;
+    display: flex;
+    width: 84%;
+    height: 220rpx;
+}
+
+.r-tickets {
+    flex: 1;
+    position: relative;
+    background: radial-gradient(circle at left top, transparent 16rpx, #f8f4ec 0, #f8f4ec 100%) right top / 100% 50% no-repeat,
+        radial-gradient(circle at left bottom, transparent 16rpx, #f8f4ec 0, #f8f4ec 100%) right bottom / 100% 50% no-repeat;
+    filter: drop-shadow(3rpx 0 3rpx rgba(0, 0, 0, .3));
+}
+
+.r-tickets::before {
+    content: '';
+    width: 1rpx;
+    background: linear-gradient(to top, #fff 0%, #fff 50%, transparent 50%) top left / 1rpx 20rpx repeat-y;
+    position: absolute;
+    left: 0;
+    top: 16rpx;
+    bottom: 16rpx;
+}
+
+.r-tickets::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 8rpx;
+    top: 0;
+    right: -8rpx;
+    background: radial-gradient(circle at right center, transparent 8rpx, #f8f4ec 0) right center / 8rpx 20rpx;
+}
+
+.l-tickets {
+    width: 70%;
+    position: relative;
+    background: radial-gradient(circle at right top, transparent 16rpx, #f8f4ec 0, #f8f4ec 100%) right top / 100% 50% no-repeat,
+        radial-gradient(circle at right bottom, transparent 16rpx, #f8f4ec 0, #f8f4ec 100%) right bottom / 100% 50% no-repeat;
+    filter: drop-shadow(6rpx 0 6rpx rgba(0, 0, 0, .3));
+}
+
+.l-tickets::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 8rpx;
+    top: 0;
+    left: -8rpx;
+    background: radial-gradient(circle at left center, transparent 8rpx, #f8f4ec 0) left center / 8rpx 20rpx;
+}
+
+
+/* 优惠券名称样式 */
+.l-tickets>view:nth-child(1) {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 50rpx;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* 优惠券描述样式 */
+.l-tickets>view:nth-child(2) {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 50rpx;
+    margin-bottom: 1em;
+}
+
+/* 有效期截至样式 */
+.l-tickets>view:nth-child(3) {
+    font-size: 0.8em;
+    margin-left: 50rpx;
+    color: #666;
+}
+
+/* 优惠券状态样式 */
+.r-tickets>view {
+    font-size: 1.6em;
+    color: #beaf64;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+}

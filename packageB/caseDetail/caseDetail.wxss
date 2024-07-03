@@ -1,0 +1,98 @@
+/* packageB/caseDetail/caseDetail.wxss */
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    background-image: url('http://backend-ngj.oss-cn-shanghai.aliyuncs.com/fenxiangbeijing.png');
+}
+
+.page .header {
+    margin-top: 170rpx;
+    width: 100%;
+    height: 130rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .carName {
+    font-size: 35rpx;
+    line-height: 1.5;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+}
+
+.header .time {
+    font-size: 22rpx;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    color: #c3c3c3;
+}
+
+.page .content {
+    margin-top: 50rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .title {
+    font-size: 30rpx;
+    line-height: 1.5;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    margin-left: 30rpx;
+}
+
+.content .desc {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 100rpx;
+    margin-top: 30rpx;
+}
+
+.desc .itemName {
+    width: 45%;
+    font-size: 26rpx;
+    line-height: 2.0;
+    color: #686868;
+}
+
+.desc .itemName_l {
+    width: 80%;
+    font-size: 26rpx;
+    line-height: 2.0;
+    color: #686868;
+}
+
+.page .imgArea {
+    /* height: 61.7vh; */
+    margin-top: 50rpx;
+    width: 100%;
+    margin-bottom: 50rpx;
+
+    /* justify-content: center; */
+}
+
+.imgArea .imgName {
+    font-size: 30rpx;
+    line-height: 1.5;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    margin-left: 30rpx;
+}
+
+.imgArea .imgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgs .img {
+    margin-top: 40rpx;
+    border-radius: 15rpx;
+}

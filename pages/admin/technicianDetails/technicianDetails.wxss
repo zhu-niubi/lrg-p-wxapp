@@ -1,0 +1,146 @@
+/* pages/admin/technicianDetails/technicianDetails.wxss */
+.page {
+    width: 100%;
+    height: 100%;
+}
+.page .background {
+    width: 100%;
+    height: 100vh;
+    position:fixed; 
+    background-size:100% 100%;
+    z-index: -1;
+        
+}
+.page .content-1 {
+    width: 100%;
+    /* height: 200vh; */
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a89385;
+    /* color: #c6b7ad; */
+}
+.content-1 .title {
+    /* border: 2rpx solid white; */
+    position: absolute;
+    top: 370rpx;
+    letter-spacing: 10rpx;
+    font-size: 50rpx;
+}
+.content-1 .des_title {
+    position: absolute;
+    top: 800rpx;
+    letter-spacing: 5rpx;
+    font-size: 46rpx;
+}
+.content-1 .des_content {
+    position: absolute;
+    top: 880rpx;
+    letter-spacing: 3rpx;
+    font-size: 30rpx;
+    color: #c6b7ad;
+    /* border: solid red; */
+}
+.content-1 .des_content2 {
+    position: absolute;
+    top: 940rpx;
+    letter-spacing: 3rpx;
+    font-size: 30rpx;
+    color: #c6b7ad;
+    /* border: solid red; */
+}
+.content-1 .des_content3 {
+    position: absolute;
+    top: 1400rpx;
+    letter-spacing: 3rpx;
+    font-size: 25rpx;
+    /* border: solid red; */
+}
+.content-1 .icon_img {
+    /* height: 30rpx;
+    width: 30rpx; */
+    position:absolute;
+    top: 1450rpx;
+    /* border: solid; */
+    height: 27px;
+    width: 27px;
+}
+.content-1 .rule_title {
+    position: absolute;
+    top: 105vh;
+    left: 50rpx;
+    letter-spacing: 5rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    color: white;
+    border-bottom: 6rpx solid;
+    border-image: linear-gradient(-90deg, rgba(193, 191, 194, 0) 0%, #ee0a24 100%) 2
+        2 2 2 !important; 
+}
+.content-1 .rule_img {
+    position: absolute;
+    top: 102vh;
+    width: 93%;
+    /* border: white solid; */
+}
+.content-1 .rule_btn {
+    position: absolute;
+    top: 102.6vh;
+    right: 60rpx;
+    width: 28%;
+    /* border: white solid; */
+}
+.content-1 .engineer_title {
+    position: absolute;
+    top: 125vh;
+    left: 50rpx;
+    letter-spacing: 5rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    color: white;
+    border-bottom: 6rpx solid;
+    border-image: linear-gradient(-90deg, rgba(193, 191, 194, 0) 0%, #ee0a24 100%) 2
+        2 2 2 !important; 
+}
+.content-1 .skill {
+    position: absolute;
+    top: 160vh;
+    width: 90%;
+    height: 40vh;
+    border-radius: 30rpx;
+    /* border: solid white; */
+}
+.content-1 .logo {
+    position: absolute;
+    top: 200vh;
+    width: 30%;
+    height: 20vh;
+    /* border: solid white; */
+}
+.content-1 .engineer_swiper {
+    position: absolute;
+    top: 132vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 25vh;
+    /* border: solid white; */
+  }
+  .content-1 .engineer_swiper .swiper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  }
+  .engineer_swiper .swiper-item .cover {
+    border-radius: 20rpx;
+    width: 300rpx;
+    height: 400rpx;
+  }
+
+
+
+
+

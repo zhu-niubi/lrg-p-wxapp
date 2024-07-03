@@ -1,0 +1,117 @@
+<!--packageA/evaluationRules/evaluationRules.wxml-->
+<view class="page">
+    <navigation color="#fff">星级技师评判规则</navigation>
+    <view class="header">
+        <view class="title">
+            Star Technician Evaluation Rules
+        </view>
+    </view>
+    <view class="contentArea">
+        <view class="title">
+            一、评选范围:
+        </view>
+        <view class="content">
+            <view class="text">
+                凡入职满六个月以上且已转正的员工
+            </view>
+            
+        </view>
+        <view class="title">
+            二、评选原则:
+        </view>
+        <view class="content">
+            <view class="text">
+                遵循公开、公平、公正的原则
+            </view>
+            
+        </view>
+        <view class="title">
+            三、评选要求:
+        </view>
+        <view class="content">
+            <view class="text">
+                1、星级员工评选原则上应以各门店贴膜技师为主体
+            </view>
+            <view class="text">
+                2、星级员工入选应能够获得本部门多数员工的认同
+            </view>
+            <view class="text">
+                3、评选过程中应注重对突出事迹的收集和验证
+            </view> 
+        </view>
+        <view class="title">
+            四、星级员工评选数量:
+        </view>
+        <view class="content">
+            <view class="text">
+                原则上一星级员工每月每部门不超过3名，二星级员工累计获得两次一星级方可推选，三星级员工累计获得两次二星级方可推选
+            </view>
+        </view>
+        <view class="title">
+            五、评选办法:
+        </view>
+        <view class="content">
+            <view class="text">
+                1、各部门按照评选标准采取民主评选或由部门负责人提名，将评选结果填写对于《星级员工推荐表》后报门店店长或负责人，上报材料应突出典型事迹或优秀表现
+            </view>
+            <view class="text">
+                2、星级员工评选门店做好记录存档，作为评选年度星级技师的依据
+            </view>
+           <view class="text">
+                 3、星级员工的评比坚持高标准、严要求，突出业绩(效益)和服务态度的原则
+           </view>
+            
+        </view>
+        <view class="title">
+            六、评选准则:
+        </view>
+        <view class="content">
+            <view class="text">
+                采取部门民主评议、投票或部门负责人提名。由“评定小组”根据推荐员工的实际工作表现研究审定，评判规则是根据本公司的技术能力、服务质量和客户评价等因素来评判技师的水平和能力的一种标准，具体规则的评判，一般来说，技师评判标准包括一下7个方面：
+            </view>
+            <view class="text">
+                1.技术能力：评估技师在相关领域的专业知识和技能水平，包括学历、培训经历、持证情况等方面。
+            </view>
+            <view class="text">
+                2.服务质量：评估技师在工作中所提供的服务质量，包括工作态度、效率、准确性等方面，通过客户满意度调查、服务质量指标等来评估。
+            </view>
+            <view class="text">
+                3.客户评价：收集客户对技师工作的评价和反馈，考察技师在客户眼中的口碑和信誉，可以通过客户评价表、在线评价平台等方式来评估。
+            </view>
+            <view class="text">
+                4.学习和培训：我们会定期评估技师对行业新技术、新知识的学习和应用情况，包括参加培训、持续教育等方面。
+            </view>
+            <view class="text">
+                5.工作经验：评估技师在贴膜领域的工作经验和实践经历，从事该行业的时长和施工品牌种类进行方面。
+            </view>
+            <view class="text">
+                6.专业认可：定期评估技师能力或组织公司相关专业人员对其技术能力的认可程度，通过获得专业认证者颁发【资格证书】等。
+            </view>
+            <view class="text">
+                7.团队合作：评估技师在团队中的合作能力和与同事之间的配合情况，包括与其他技师的协作能力等。
+            </view>
+            
+        </view>
+        <view class="title">
+            评判目的： 
+        </view>
+        <view class="content">
+            <view class="text">
+                1.在公司造就一支业务精干的高素质的、高标准、高度凝聚力和团队精神的贴膜队伍，并形成技艺为核心导向的人才管理机制。
+            </view>
+            <view class="text">
+                2.通过指标体系的设计、考核，使员工明确工作重点。
+            </view>
+           <view class="text">
+                3.及时、公正地对员工过去一段时间的工作绩效进行评估，肯定成绩，发现问题，为下一阶段工作的绩效改进做好准备。
+           </view>
+            <view class="text">
+                4.通过客观公正的评价进行合理的绩效奖金分配，树立车主为导向的公平公正文化。
+            </view>
+            <view class="text">
+                5.为培训、薪资调整、年度评优、岗位调整、考核提供参考依据。
+            </view>
+            
+        </view>
+    </view>
+</view>

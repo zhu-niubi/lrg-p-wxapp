@@ -1,0 +1,40 @@
+<!-- packageA/cenefitCard/benefitCard.wxml -->
+<view class="page page-padding-b-md-1">
+    <navigation>权益卡</navigation>
+    <view class="page-position-fixed-t page-1" style="padding-top:{{navbarHeight}}px;">
+        <view class="card-container" wx:if="{{benefitCardList.length > 0}}" wx:for="{{benefitCardList}}" wx:for-item="itembenefit" wx:for-index="indexbenefit" wx:key="indexbenefit">
+            <view class="card" style="background-image: url('{{itembenefit.productPackPictrue}}'); background-size : cover">
+                <view class="card-header">V I P</view>
+                <view class="card-expiry" bindtap='handleIsExpand' bindtap='handleIsExpand' data-index="{{indexbenefit}}">
+                    有效期至 {{itembenefit.deadline}}
+                    使用说明
+                    <van-icon name="{{itembenefit.isExpand ? 'arrow-up' : 'arrow-down' }}" />
+                </view>
+            </view>
+            <view class="usage-details" wx:if="{{itembenefit.isExpand}}">
+                <view class="page-size-1 page-padding-b-xs">
+                    <span>权益卡描述：{{itembenefit.memo||'卡券说明xxx'}}</span>
+                </view>
+                <view class="page-size-1 page-padding-b-xs" wx:if="{{itembenefit.applyStore.length > 0}}">
+                    <view wx:for="{{itembenefit.applyStore}}" wx:key="id">
+                        <view wx:if="{{itembenefit.applyStore[0].id == 0}}">
+                            全部门店可用
+                        </view>
+                        <view wx:else="{{itembenefit.applyStore[0].id != 0}}">
+                            仅限{{item.name}}<block wx:if="{{!$last}}">,</block>使用
+                        </view>
+                    </view>
+                </view>
+                <view class="page-size-1 page-padding-b-xs" wx:if="{{itembenefit.products.length > 0}}">
+                    <view wx:for="{{itembenefit.products}}" wx:for-item="product" wx:key="id">
+                           {{product.productName}}*{{product.quantity}}
+                    </view>
+                </view>
+                <view class="page-size-1 page-padding-b-xs">
+                    使用时间：截至{{itembenefit.deadline}}
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>

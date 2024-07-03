@@ -1,0 +1,34 @@
+.van-search__content {
+  background-color: var(--search-background-color, rgba(0, 0, 0, 0.3)) !important;
+}
+
+.vant-custom {
+  padding: 100rpx 230rpx 10rpx 30rpx !important;
+}
+
+
+.card .page-margin-y-xs .flex-9 .useBtn {
+  width: 150rpx;
+  height: 50rpx;
+  border: #ff7416 solid 2rpx;
+  margin-left: 250rpx;
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #fff; */
+  /* color: #fff; */
+  color: #ff7416;
+  border-radius: 30rpx;
+}
+
+.card .page-margin-y-xs .flex-9 .waitPay {
+  width: 270rpx;
+  height: 60rpx;
+  /* border: #ff7416 solid 2rpx; */
+  margin-left: 180rpx;
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

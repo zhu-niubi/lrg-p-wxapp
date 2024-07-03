@@ -1,0 +1,12 @@
+.information:nth-last-child(2) {
+    border: 0;
+}
+
+.ocr-wrapper {
+    margin: 40rpx auto;
+    width: 375rpx;
+}
+
+.intro {
+    margin: 40rpx;
+}

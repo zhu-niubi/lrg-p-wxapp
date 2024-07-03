@@ -1,0 +1,83 @@
+/* pages/admin/putMaterial/putMaterial.wxss */
+.page {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-size: cover;
+}
+.page > .title {
+  margin: 200rpx 0 100rpx 0;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  font-weight: bold;
+}
+
+.page .title .time {
+  margin-top: 30rpx;
+  font-size: 25rpx;
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  font-weight: normal;
+  color: #d3d3d3;
+}
+
+.page .content {
+  position: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20rpx;
+  width: 100%;
+  padding-bottom: 240rpx;
+  
+}
+
+.page .content .title {
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  font-weight: normal;
+  margin-bottom: 20rpx;
+}
+
+.page .content > .desc {
+  margin-bottom: 80rpx;
+}
+
+.page .information {
+  margin: 20rpx 0;
+}
+
+.page .information image {
+  margin-bottom: 10rpx;
+}
+
+.page .submit {
+  position: fixed;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.page .share-btn {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  margin-left: 10rpx;
+}
+
+.page .padding-50 {
+  padding: 30rpx 50rpx !important;
+}
+
+.page .content .tt {
+    margin-bottom: 60rpx;
+}

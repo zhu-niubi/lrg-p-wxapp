@@ -1,0 +1,19 @@
+.txt .rich-text {
+  width: 100%;
+  overflow: hidden;
+  line-height: 1.8;
+}
+
+.imgs {
+  width: 100%;
+  display: block;
+}
+
+.van-sidebar-item--selected {
+  border-color: var(--sidebar-selected-border-color, #ff7416) !important;
+}
+
+.scrollHeight {
+  /* height: 600rpx; */
+  height: 80vh;
+}

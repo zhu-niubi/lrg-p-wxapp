@@ -1,0 +1,110 @@
+<!-- myCard.wxml -->
+<view class="page page-height-xl">
+    <!-- 导航栏 -->
+    <!-- <navigation>搜索</navigation> -->
+
+    <view class="page-top-search page-position-fixed-t page-1">
+        <view class="flex">
+            <van-icon name="arrow-left" class="flex-1 page-size-4 page-margin-t-xl" bind:click="onClickLeft" />
+            <van-search class="flex-11" custom-class="vant-custom" value="{{ searchVal }}" shape="round" placeholder="输入商品名/订单编号" bind:search="onFilterChange" data-name="searchVal" />
+        </view>
+
+        <van-tabs color="#ff7416" active="{{ tabActive }}" bind:change="onTabChange">
+            <van-tab wx:for="{{orderTabList}}" wx:key="indexTab" wx:for-item="itemTab" title="{{itemTab.name}}"></van-tab>
+        </van-tabs>
+    </view>
+
+    <!--内容部分 -->
+
+    <view style="padding-top:{{navbarHeight}}px;" class="page-margin-y-md"> </view>
+    <block wx:if="{{orderList.length > 0}}">
+        <view class="page-padding-t-sm-1 page-content  page-padding-b-md">
+            <view class="card clear-float " wx:for="{{ orderList }}" wx:for-item="itemOrder" wx:for-index="indexOrder" wx:key="indexOrder" >
+                <view class="page-margin-y-xs flex page-size-1">
+                    <view class="page-color-gray-1">订单编号: {{itemOrder.orderNumber}}</view>
+                    <!-- <view class="page-color-gray">{{itemOrder.status !== 3 && itemOrder.status !==0 ? '待付款' : itemOrder.status === 3 ? ' 交易完成' : '交易关闭'}}</view> -->
+                    <!-- <view class="page-color-gray">{{itemOrder.payStage !== 3 && itemOrder.status !== 0 ? '待付款' : '已付款'}}</view> -->
+                    <view class="page-color-gray">
+                        {{
+                            itemOrder.status === 0
+                            ? '已取消'
+                            : itemOrder.status === 2
+                            ? '已完成'
+                            : itemOrder.payStage !== 3
+                            ? '待付款'
+                            : '待使用'
+                        }}
+                    </view>
+
+                </view>
+                <view class="flex page-margin-y-xs">
+                    <view class="flex-3 page-margin-y-xs">
+                        <image class="page-image-size-md" style="border-radius: 10rpx;height: 80rpx;width: 140rpx;" src="{{itemOrder.orderSku[0].productBanner[0]}}" mode="aspectFill" />
+                    </view>
+                    <view class="flex-9 page-margin-l-sm clear-float">
+                        <view class="float-left">
+                            <view class="page-size-2 bold">{{itemOrder.orderSku[0].productName}}</view>
+                            <view class="page-size-1 page-color-gray">
+                                <span>{{itemOrder.orderSku[0].productSkuName}}</span>
+                            </view>
+                        </view>
+                        <view class="useBtn" wx:if="{{tabActive == 2 && itemOrder.payStage == 3}}" bindtap="gotoOrderDetail" data-orderid="{{itemOrder.id}}">
+                            去使用
+                        </view>
+                        <view class="waitPay" wx:if="{{tabActive == 1 && itemOrder.payStage == 1}}">
+                            <van-button  type="default" size="mini" round bindtap="deleteOrder" data-orderid="{{itemOrder.id}}">取消订单</van-button>
+                            <van-button  type="default" size="mini" color="#ff7416" round
+                            bindtap="gotoPay" data-obj="{{itemOrder}}"
+                            >支付订单</van-button>
+                        </view>
+                        
+                    </view>
+                    <van-icon wx:if="{{itemOrder.orderSku.length > 1}}" name="{{itemOrder.detail == true ? 'arrow-up':'arrow-down'}}" bindtap="gotoDetail" data-index="{{indexOrder}}"/>
+                </view>
+                <!-- 内容 -->
+                <view class="flex page-margin-y-xs" wx:for="{{itemOrder.orderSku}}" wx:for-item="itemSku" wx:for-index="indexSku" wx:key="indexSku" wx:if="{{itemOrder.detail == true && indexSku > 0}}">
+                    <view class="flex-3 page-margin-y-xs">
+                        <image class="page-image-size-md" style="border-radius: 10rpx;height: 80rpx;width: 140rpx;" src="{{itemSku.productBanner[0]}}" mode="aspectFill" />
+                    </view>
+                    <view class="flex-9 page-margin-l-sm clear-float">
+                        <view class="float-left">
+                            <view class="page-size-2 bold">{{itemSku.productName}}</view>
+                            <view class="page-size-1 page-color-gray">
+                                <span>{{itemSku.productSkuName}}</span>
+                            </view>
+                        </view>
+                        <view class="useBtn" wx:if="{{tabActive == 2 && itemOrder.payStage == 3 && indexSku == 0}}" bindtap="gotoOrderDetail" data-orderid="{{itemOrder.id}}">
+                            去使用
+                        </view>
+                        <view class="waitPay" wx:if="{{tabActive == 1 && itemOrder.payStage == 1 && indexSku == 0}}">
+                            <van-button  type="default" size="mini" round bindtap="deleteOrder" data-orderid="{{itemOrder.id}}">取消订单</van-button>
+                            <van-button  type="default" size="mini" color="#ff7416" round
+                            bindtap="gotoPay" data-obj="{{itemOrder}}"
+                            >支付订单</van-button>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- <view class="float-right clear-float">
+                    <view >实付款：<span class="page-size-1">￥</span><span class="page-size-3">{{itemOrder.actualPrice}}</span></view>
+                </view> -->
+                <!-- 支付按钮 -->
+                <view class="float-right">
+                    <!-- <van-button wx:if="{{itemOrder.payStage === 3}}" round size="small" color="rgb(88, 88, 88)" plain data-id="{{itemOrder.id}}" data-productid="{{itemOrder.productId}}">去使用</van-button> -->
+
+<!-- <van-button wx:if="{{ itemOrder.status !== 3 && itemOrder.status !==0}}" custom-class="page-margin-l-sm" round size="small" color="#ff7416" plain data-id="{{itemOrder.id}}" data-productid="{{itemOrder.productId}}" bind:click="gotoPay">立即支付</van-button> -->
+
+                </view>
+
+            </view>
+
+            <!-- 见底提示 -->
+            <van-divider wx:if="{{isTouchGround}}" contentPosition="center">我是有底线的~</van-divider>
+        </view>
+    </block>
+
+    <block wx:else style="height: {{windowHeight}}px;">
+        <van-empty description="暂无相关订单数据" />
+    </block>
+</view>
+<van-dialog id="van-dialog" />

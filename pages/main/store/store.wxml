@@ -1,0 +1,267 @@
+<!-- store.wxml -->
+<view class="page">
+    <image class="background" src="http://backend-ngj.oss-cn-shanghai.aliyuncs.com/fe5ae537405d6678f5298745012d175.png" mode="aspectFill" />
+    <view class="header">
+        <view class="selectArea" bindtap="goChooseStore">
+            <van-icon name="location-o" color="black" />
+            <text class="store_name">{{selectedStore.name}}</text>
+        </view>
+        <view class="cardArea">
+            <view class="user_card" style="background-image: url('{{storeBgImg}}'); ">
+                <view class="card_title">
+                    <span class="leveltext">{{levelText || '请先登录'}}</span>
+                    <span class="pointsRules" bindtap="showPopup">积分规则
+                        <van-icon name="chat-o" color="black" bindtap="showPopup" />
+                    </span>
+                </view>
+                <view class="progress">
+                    <progress percent="{{25}}" backgroundColor="white" activeColor="#c4af83" duration="30" border-radius="20rpx" active></progress>
+                </view>
+                <view class="des_progress">
+                    再获取1200积分，升级为车衣潮人
+                </view>
+                <view class="card_footer">
+                    <view class="pointsArea">
+                        <text style="font-size: 1em; margin-right: 0.5em;">
+                            账户积分
+                        </text>
+                        <text class="page-size-4 bold " style="color: #c4af83;">{{userInfo.pointQuantity || 0}}</text>
+                    </view>
+                    <view class="benefitArea">
+                        <view class="benefit1" bindtap="goConsumerCouponPage" data-index="0">
+                            <van-icon name="coupon-o" size="55rpx" style="margin-bottom: 0.2em;" />
+                            <view class="b_des">消费券</view>
+                        </view>
+                        <view class="benefit2" bindtap="goBenefitCardPage" data-index="1">
+                            <van-icon name="vip-card-o" size="55rpx" style="margin-bottom: 0.2em;" />
+                            <view class="b_des">权益卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <view class="tabArea">
+            <van-tabs class="tab" active="{{ tabActive }}" bind:change="onTabChange" title-active-color="#ff7416" color="#ff7416">
+                <van-tab wx:for="{{storeTabList}}" wx:key="indexTab" wx:for-item="itemTab" title="{{itemTab.name}}"></van-tab>
+            </van-tabs>
+        </view>
+        <view class="productArea">
+            <!-- 卡券 -->
+            <van-grid column-num="2" border='{{false}}' center="{{true}}">
+                <view class="title" wx:if="{{ProductList.length}}">卡券</view>
+                <van-grid-item use-slot wx:for="{{ProductList}}" wx:key="index">
+                    <view class="productCard" >
+                        <image class="img" mode="aspectFill" src="{{ item.banners[0] }}"></image>
+                        <view class="des_card">
+                            <!-- <view class="textArea">
+                                <view class="name">
+                                    {{item.name}}
+                                </view>
+                                <view class="des">
+                                    {{item.description}}
+                                </view>
+                            </view> -->
+                        </view>
+                        <view class="btnArea">
+                            <!-- <view class="name">
+                                   
+                            </view> -->
+                            <view class="price" wx:if="{{item.saleStatus === 1 && tabActive === 0}}">
+                                {{item.name}}
+                            </view>
+                            <view class="price" wx:if="{{tabActive === 1}}">
+                                {{item.name}}
+                            </view>
+                            
+                            <van-button wx:if="{{item.saleStatus === 1 && tabActive === 0}}" size="mini" round color="#eee" custom-class="btn" hairline="true"
+                            bindtap="gotoProductDetail" data-productId="{{item.id}}" data-type="{{tabActive}}"
+                            >
+                                查看详情
+                            </van-button>
+                            <van-button wx:if="{{itabActive === 1}}" hairline="true" round="true" size="mini" color="#F05626" custom-class="btn1"
+                            bindtap="gotoProductDetail" data-productId="{{item.id}}" data-type="{{tabActive}}"
+                            >
+                                积分兑换
+                            </van-button>
+                        </view>
+                    </view>
+                </van-grid-item>
+            </van-grid>
+            <!-- 车膜 -->
+            <van-grid column-num="2" border='{{false}}' center="{{true}}">
+                <view class="title" wx:if="{{FilmList.length}}">车膜</view>
+                <van-grid-item use-slot wx:for="{{FilmList}}" wx:key="index">
+                    <view class="productCard">
+                        <image class="img" mode="aspectFill" src="{{ item.banners[0] }}"></image>
+                        <view class="des_card">
+                            <!-- <view class="textArea">
+                                <view class="name">
+                                    {{item.name}}
+                                </view>
+                                <view class="des">
+                                    {{item.description}}
+                                </view>
+                            </view> -->
+                        </view>
+                        <view class="btnArea">
+                            <!-- <view class="price" wx:if="{{item.saleStatus === 1 && tabActive === 0}}">
+                                {{item.name}}  |￥{{item.price}}
+                            </view> -->
+                            <view class="price" wx:if="{{item.saleStatus === 1 && tabActive === 0}}">
+                                {{item.name}}
+                            </view>
+                            <!-- <van-button wx:if="{{item.pointStatus === 1 && tabActive === 1}}" data-id="{{ item.id }}" data-productid="{{ item.productId }}" hairline="true" round="true" size="mini" color="#F05626" custom-class="btn1">
+                                积分兑换
+                            </van-button> -->
+                            <van-button wx:if="{{item.saleStatus === 1 && tabActive === 0}}" size="mini" round color="#eee" custom-class="btn" hairline="true"
+                            bindtap="gotoProductDetail" data-productId="{{item.id}}" data-type="{{tabActive}}"
+                            >
+                                查看详情
+                            </van-button>
+                        </view>
+                    </view>
+                </van-grid-item>
+            </van-grid>
+            <!-- 权益卡 -->
+            <van-grid column-num="2" border='{{false}}' center="{{true}}"  wx:if="{{tabActive === 0}}">
+                <view class="title" wx:if="{{benefitCardList.length}}">权益卡</view>
+                <van-grid-item use-slot wx:for="{{benefitCardList}}" wx:key="index">
+                    <view class="productCard">
+                        <image class="img" mode="aspectFill" src="{{ item.pictrue }}"></image>
+                        <view class="des_card">
+                            <view class="textArea">
+                                <!-- <view class="name">
+                                    {{item.name}}
+                                </view>
+                                <view class="des">
+                                    {{item.description}}
+                                </view> -->
+                            </view>
+                        </view>
+                        <view class="btnArea">
+                            <view class="price" wx:if="{{item.saleStatus === 1 && tabActive === 0}}">
+                                {{item.name}}
+                            </view>
+                            <!-- <van-button wx:if="{{item.pointStatus === 1 && tabActive === 1}}" data-id="{{ item.id }}" data-productid="{{ item.productId }}" hairline="true" round="true" size="mini" color="#F05626" custom-class="btn1">
+                                积分兑换
+                            </van-button> -->
+                            <van-button wx:if="{{item.saleStatus === 1 && tabActive === 0}}" size="mini" round color="#eee" custom-class="btn" hairline="true"
+                            bindtap="gotoProductDetail" data-productId="{{item.id}}" data-type="{{tabActive}}"
+                            >
+                                查看详情
+                            </van-button>
+                        </view>
+                    </view>
+                </van-grid-item>
+            </van-grid>
+            <!-- 周边 -->
+            <view class="last">
+                <van-grid column-num="2" border='{{false}}' center="{{true}}">
+                    <view class="title" wx:if="{{PerimeterList.length}}">周边</view>
+                    <van-grid-item use-slot wx:for="{{PerimeterList}}" wx:key="index">
+                        <view class="productCard">
+                            <image class="img" mode="aspectFill" src="{{ item.banners[0] }}"></image>
+                            <view class="des_card">
+                                <view class="textArea">
+                                    <!-- <view class="name">
+                                        {{item.name}}
+                                    </view>
+                                    <view class="des">
+                                        {{item.description}}
+                                    </view> -->
+                                </view>
+                            </view>
+                            <view class="btnArea">
+                                <view class="price" wx:if="{{item.saleStatus === 1 && tabActive === 0}}">
+                                    {{item.name}}
+                                </view>
+                                <view class="price" wx:else="{{tabActive === 1}}">
+                                    {{item.name}}
+                                 </view>
+                                <van-button wx:if="{{tabActive === 1}}" hairline="true" round="true" size="mini" color="#F05626" custom-class="btn1"
+                                bindtap="gotoProductDetail" data-productId="{{item.id}}" data-type="{{tabActive}}"
+                                >
+                                    积分兑换
+                                </van-button>
+                                <van-button wx:if="{{item.saleStatus === 1 && tabActive === 0}}" size="mini" round color="#eee" custom-class="btn" hairline="true"
+                                bindtap="gotoProductDetail" data-productId="{{item.id}}" data-type="{{tabActive}}"
+                                >
+                                    查看详情
+                                </van-button>
+                            </view>
+                        </view>
+                    </van-grid-item>
+                </van-grid>
+            </view>
+
+        </view>
+
+
+
+    </view>
+
+
+    <van-popup show="{{ show }}" position="bottom" bind:close="onClose" custom-style="height: 80%" round="true">
+        <!-- <view style="padding-top:{{navbarHeight}}px;"> -->
+        <view class="popup-content">
+            <text class="subtitle">一、积分场景：</text>
+            <view class="paragraph">
+                <text>如您已注册纳管家，您可以在纳管家小程序和场景发生的有效消费行为，即可获得会员积分（“积分”），通常可累积积分的有效消费和兑换行为包括（以门店消费、参与活动等）以下情形不予累积积分（或暂不支持累计积分）：
+                </text>
+            </view>
+
+            <view class="paragraph">
+                <text>
+                    1.以外部手段刷取积分的，不予积累积分；
+                    <br />
+                    2.通过第三方平台上的售卖服务（在抖音平台或其他平台上，其积分规则见上）；
+                    <br />
+                    3.其他未明确注明可累积积分的情形；
+                    <br />
+                    4.通过门店工作人员后台进行下单操作的(后台人员没有对应的积分权限发放者)；
+                    <br />
+                    5.找到小程序漏洞，恶意刷取积分者，不予积累积分；
+                    <br />
+                    符合本政策规定的积分，一般情况下24小时内自动进入您的积分账户，特殊情况下会有延迟。
+                </text>
+
+            </view>
+            <text class="subtitle">二、积分用途：</text>
+            <view class="paragraph">
+                <text>
+                    1.累计到特定数量的积分后，您可以在纳管家小程序中的【商城】兑换各类卡券或权益卡，详见以届时公示的卡券详情说明或相关活动说明为准。
+                    <br />
+                    2.积分礼品将不定期进行调整，并以实际供应为准。
+                </text>
+            </view>
+            <text class="subtitle">三、积分有效期：</text>
+            <view class="paragraph">
+                <text>永久有效，如在积分有效期内注销的，则所有积分同时失效并自动从积分账户中扣除。</text>
+            </view>
+            <text class="subtitle">四、积分说明：</text>
+            <view class="paragraph">
+                <text>
+                    1.使用积分兑换卡券或产品，或积分加现金方式购买的交易，其中使用积分兑换的部分不支持开具发票。
+                    <br />
+                    2.如您在订单符合要求的情况下未自动获得积分，请您联系“购买商品的对应门店工作人员”。在核实您的订单信息及个人信息后，我们将为您补计积分。
+                    <br />
+                    3.如果因各种原因而导致可累积积分的消费和兑换行为未成功，如产生退货、取消订单等情形，我们将撤销您账号内因为此次消费和兑换行为而相应赠送的积分。
+                    <br />
+                    4.积分一经兑换后，不可退还。如兑换物品有质量问题，请联系“纳管家门店人员”，我们将根据具体情形提供相关售后服务或售后意见。
+
+
+                </text>
+
+            </view>
+            <van-button type="default" class="btn" bindtap="onClose" round="true" color="black">
+                我已知晓上述积分规则，点击关闭
+            </van-button>
+
+        </view>
+
+
+        <!-- </view> -->
+    </van-popup>
+</view>

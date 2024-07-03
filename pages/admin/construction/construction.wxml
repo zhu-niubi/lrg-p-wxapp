@@ -1,0 +1,119 @@
+<!-- myCard.wxml -->
+<view class="page page-height-xl">
+    <!-- 导航栏 -->
+    <navigation backgroud>施工单</navigation>
+
+    <view class="page-position-fixed-t" style="padding-top:{{navbarHeight-1}}px;">
+        <van-dropdown-menu active-color=" #ff7416">
+            <van-dropdown-item value="{{ myCarValue }}" options="{{ myCarInfoList }}" bind:change="onFilterChange" data-name="userCarId" />
+            <van-dropdown-item value="{{ proPriceValue }}" options="{{ proPriceOption }}" bind:change="onFilterChange" data-name="proPriceValue" />
+        </van-dropdown-menu>
+    </view>
+
+    <!--内容部分 -->
+
+    <view style="padding-top:{{navbarHeight}}px;"> </view>
+    <block wx:if="{{constructionList.length > 0}}">
+        <view class="page-padding-t-lg page-content  page-padding-b-md">
+            <view class="page-text-align-center" wx:if="{{isLoading}}">
+                <van-loading size="24px" vertical type="spinner">刷新中...</van-loading>
+            </view>
+            <view class="page-position-r " wx:for="{{ constructionList }}" wx:for-item="itemBuild" wx:for-index="indexBuild" wx:key="indexBuild">
+                <view class="card" data-id="{{itemBuild.id}}" bindtap="handleDetail">
+
+                    <!-- 内容 -->
+                    <view class="page-margin-y-xs flex page-size-1">
+                        <view class="page-padding-b-xs page-size-2">施工产品:<span class="page-theme-color"> {{itemBuild.productName}}</span></view>
+                        <view>{{
+                            itemBuild.status === 1
+                            ? '待客户确认'
+                            : itemBuild.status === 2
+                            ? '客户已确认'
+                            : itemBuild.status === 3
+                            ? '质检员已确认'
+                            : itemBuild.status === 4
+                            ? '开始施工'
+                            : itemBuild.status === 5
+                            ? '施工完成'
+                            : itemBuild.status === 6
+                            ? '用户已提车确认'
+                            : itemBuild.status === 7
+                            ? '店长已确认'
+                            : ''
+                            }}</view>
+
+                    </view>
+                    <view class=" page-margin-y-xs page-margin-b-md page-size-1">
+                        <view class="page-margin-y-xs page-padding-b-xs">
+                            <span class="page-color-gray-1">车主姓名：{{itemBuild.userName}}</span>
+                            <span class="page-color-gray-1 page-margin-l-md">手机号：{{itemBuild.phoneNumber}}</span>
+                        </view>
+                        <view class="page-margin-y-xs page-padding-b-xs">
+                            <span class="page-color-gray-1">用户车型：{{itemBuild.carName}}</span>
+                            <span class="page-color-gray-1 page-margin-l-md">车牌：{{itemBuild.carNumber}}</span>
+                        </view>
+                        <view class="page-margin-y-xs page-padding-b-xs">
+                            <span class="page-color-gray-1">预计完成时间：{{itemBuild.expectComplete}}</span>
+                        </view>
+              
+                    </view>
+              
+                    
+                </view>
+                 <!-- 状态按钮 -->
+                 <view class="page-position-b" wx:if="{{itemBuild.statusName}}">
+                    <van-button custom-class="page-margin-l-sm" round size="small" color="#ff7416" plain data-id="{{itemBuild.id}}" bind:click="constructionStartOk" data-status="{{itemBuild.status}}">{{itemBuild.statusName}}</van-button>
+                </view>
+
+                <!-- 质保查询页面跳转 -->
+                <view class="page-position-b" style="z-index: 10;" wx:if="{{itemBuild.status === 7}}">
+                    <van-button custom-class="page-margin-l-sm" round size="small" color="green" plain bindtap="handleShare" data-id="{{ itemBuild.id }}">一键分享</van-button>
+                    
+                    <van-button custom-class="page-margin-l-sm" round size="small" color="#ff7416" plain bindtap="gotoDamageAssessment" data-data="{{ itemBuild }}">定损记录</van-button>
+
+                    <van-button custom-class="page-margin-l-sm" round size="small" color="#ff7416" plain bindtap="handleQualityAssuranceQuery" data-id="{{ itemBuild.id }}">质保查询</van-button>
+                </view>
+               
+
+            </view>
+
+            <!-- 见底提示 -->
+            <van-divider wx:if="{{isTouchGround}}" contentPosition="center">我是有底线的~</van-divider>
+        </view>
+    </block>
+
+    <block wx:else>
+        <van-empty description="暂无相关数据" />
+    </block>
+</view>
+
+<van-dialog use-slot title="交车确认" show="{{ isShowCarOk }}" show-cancel-button bind:confirm="handleCarOkConfirm">
+    <view class="dialogHieght-md">
+        <view class="page-padding-a-sm page-size-2">
+            <view class="page-size-2 bold">注意事项:</view>
+            <view class="page-color-gray-1 n-gutter-xs">
+                <view>1、补漆、掉漆的部位，施工时可能会出现局部掉漆</view>
+                <view>2、发生碰撞部位，揭膜时可能出现局部掉漆</view>
+                <view>3、安装完成后48小时内不能清洗车身，不能超过80公里/小时高速行驶，避免雨中行驶</view>
+                <view>4、洗车时，避免用力过大地擦洗保护膜的边缘，避免用高压水枪直援冲洗保护膜边緣,避免高压水枪长时间中洗同一个小块区域</view>
+                <view>5、日常清洁维护时不能使用掉色毛巾和其他易掉色物品擦拭</view>
+                <view>6、不可使用吸ー吸附膜表面</view>
+                <view>7、膜面上若有雨渍、鸟屎、虫尸、柏油、空调水或铁锈水等有腐蚀性的污渍，请在24小时内及时清洗</view>
+                <view>8、安装后若膜面有雾感、小水泡，为正常现象，十天左右会自动消失</view>
+                <view>9、安装后三天内若有起边、翘边现象，立即联系施工方回店检查维护</view>
+                <view>
+                    <view>10、建议2-3个月做一次膜面养护</view>
+                    <view>质保范围：</view>
+                    <view>隐形车衣在质保期间：</view>
+                    <view>·不起泡 ·不龟裂 ·不脱胶</view>
+                    <view>在以下非质保范围内造成的损失，将无法承诺质保：</view>
+                    <view>·对隐形车衣不恰当清洗、保养或维护</view>
+                    <view>·事故或人为导致的隐形车衣的损坏</view>
+                    <view class="page-size-2 bold text-red">·本人已确认车辆按照服务内容已全部施工完毕，并检查车辆完好无损，车内无任何物品丢失，同意验收！</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</van-dialog>
+
+<van-dialog id="van-dialog" />

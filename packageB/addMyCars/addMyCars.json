@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "navigation": "/components/navigation/navigation",
+        "ocr-navigator": "plugin://ocr-plugin/ocr-navigator"
+      },
+      "enablePullDownRefresh": true
+  }

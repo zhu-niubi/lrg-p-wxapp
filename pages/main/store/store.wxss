@@ -1,0 +1,284 @@
+.page{
+    width: 100%;
+}
+.page .background {
+    width: 100%;
+    height: 34vh;
+    position:absolute; 
+    background-size:100% 100%;
+    z-index: 0; 
+}
+/* header */
+.page .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    width: 100%;
+    height: 30vh;
+}
+.header .selectArea {
+    margin-top: 240rpx;
+    width: 100%;
+    height: 50rpx;
+    color: #000;
+    text-align: center;
+}
+.selectArea .store_name {
+    font-size: 30rpx;
+    letter-spacing: 2rpx;
+    font-weight: 600;
+}
+
+.header .cardArea {
+    width: 100%;
+    height: 400rpx;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin-top: 30rpx;
+    z-index: 3;
+}
+.cardArea .user_card {
+    width: 80%;
+    border-radius: 30rpx;
+    -moz-box-shadow:5rpx 5rpx 10rpx #333333; 
+    -webkit-box-shadow:3rpx 3rpx 8rpx #333333; 
+    box-shadow:4rpx 4rpx 20rpx #333333;
+    background-size: auto; 
+    background-position: center; 
+    padding: 20rpx;
+
+}
+.cardArea .user_card .card_title {
+    margin-bottom: 25rpx;
+    margin-top: 10rpx;
+}
+.card_title .leveltext {
+    font-size: 40rpx;
+    font-weight: bold;
+    letter-spacing: 2rpx;
+    color:#c4af83;
+    
+
+}
+.card_title .pointsRules {
+    float: right;
+    font-weight: bold;
+    
+}
+.user_card .des_progress {
+    margin-top: 10rpx;
+    font-size: 20rpx;
+}
+
+.user_card .card_footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.card_footer .pointsArea {
+    width: 40%;
+}
+.card_footer .benefitArea {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.card_footer .benefitArea .benefit1{
+    width: 40%;
+}
+.card_footer .benefitArea .benefit2{
+
+    width: 40%;
+}
+.benefit1 .b_des {
+    font-size: 20rpx;
+    line-height: 1;
+}
+.benefit2 .b_des {
+    font-size: 20rpx;
+    line-height: 1;
+}
+
+
+/* content */
+.page .content {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
+
+}
+
+.content .tabArea {
+    font-weight: bolder;
+    font-size: larger;
+    width: 100%;
+    margin-top: 70rpx;
+}
+.content .productArea {
+    padding: 0 40rpx;
+
+}
+
+.content .productArea .productCard {
+    width: 100%;
+    height: 280rpx;
+    /* background-color: #c3c3c3; */
+    /* border: solid; */
+}
+.content .productArea .productCard .img {
+    width: 300rpx;
+    height: 200rpx;
+    border-top-left-radius: 30rpx; 
+    border-top-right-radius: 30rpx;
+    -moz-box-shadow:2rpx 2rpx 5rpx #333333; 
+    -webkit-box-shadow:0rpx 0rpx 4rpx #333333; 
+    box-shadow:2rpx -2rpx -4rpx 3rpx #333333;
+    /* border: solid; */
+}
+.productArea .title {
+    font-size: 35rpx;
+    font-weight: bold;
+}
+.productArea .des_card {
+    top: 30rpx;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 77%;
+    height: 180rpx;
+    z-index: 5;
+    /* border: 2rpx solid; */
+    padding: 20rpx;
+}
+.des_card .textArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 70%;
+    height: 100rpx;
+    /* border: 2rpx solid; */
+    
+}
+.textArea .name {
+    width: 100%;
+    height: 40rpx;
+    font-size: 30rpx;
+    /* border: 2rpx solid; */
+    font-weight: 600;
+    text-align: left;
+    letter-spacing: 4rpx;
+    
+    color: #000;
+}
+
+.textArea .des {
+    width: 100%;
+    height: 40rpx;
+    font-size: 20rpx;
+    text-align: left;
+    letter-spacing: 3rpx;
+
+    color: #c3c3c3;
+
+    /* border: 2rpx solid; */
+}
+
+.content .productArea .last {
+    margin-bottom: 200rpx;
+}
+
+
+.content .productArea .productCard .btnArea {
+    width: 88.7%;
+    height: 68rpx;
+    border-bottom-left-radius: 30rpx; 
+    border-bottom-right-radius: 30rpx;
+    -moz-box-shadow:2rpx 2rpx 5rpx #333333; 
+    -webkit-box-shadow:0rpx 0rpx 4rpx #333333; 
+    box-shadow:2rpx -2rpx -4rpx 3rpx #333333;
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.content .productArea .productCard .btnArea .price {
+    width: 40%;
+    height: 60rpx;
+    font-size: 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c3c3c3;
+    /* border: 2rpx solid; */
+}
+/* .content .productArea .productCard .btnArea .name {
+    width: 50%;
+    height: 60rpx;
+    font-size: 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2rpx solid;
+} */
+
+.btnArea .btn {
+    color: #000 !important;
+    width: 110rpx;
+    letter-spacing: 3rpx;
+    margin-right: 20rpx;
+    margin-bottom: 10rpx;
+}
+.btnArea .btn1 {
+    color: #fff !important;
+    width: 110rpx;
+    letter-spacing: 3rpx;
+    margin-right: 20rpx;
+    margin-bottom: 10rpx;
+}
+
+
+
+
+
+
+
+
+
+
+/* popup */
+
+.page .popup-content {
+    padding:50rpx
+}
+  
+.popup-content  .subtitle {
+    font-weight: bold;
+    margin-top: 0.5em;
+    font-size: medium;
+  }
+  
+.popup-content  .paragraph {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 2em;
+    margin-right: 2em;
+    font-size: small;
+  }
+
+.popup-content .btn {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100rpx;
+}
+  

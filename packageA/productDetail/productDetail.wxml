@@ -1,0 +1,29 @@
+<!--packageA/productDetail/productDetail.wxml-->
+<view class="page">
+    <!-- 内容区域 -->
+    <view class="p-a-sm">
+        <!-- 产品介绍 -->
+        <view class="m-y-xs">
+            <navigation color='black'>产品列表</navigation>
+            <view class="p-y-xs">
+                <view style="padding-top: 130rpx;"/>
+                <view style="font-weight: bolder; font-size: larger; ">
+                    <van-tabs active="{{ tabActive }}" bind:change="onTabChange">
+                        <van-tab wx:for="{{productType}}" wx:key="indexTab" wx:for-item="itemTab"
+                                 title="{{itemTab.name}}"></van-tab>
+                    </van-tabs>
+                </view>
+                <view wx:if="{{productFilmList.length > 0}}">
+                    <view wx:for="{{productFilmList}}" wx:key="indexFilm" wx:for-item="itemFilm">
+                        <image class="product-img" src="{{itemFilm.banners[0]}}" mode="aspectFill" bindtap="goDetail"
+                               data-dImg="{{itemFilm.banners[1]}}"/>
+                    </view>
+                </view>
+                <view style="text-align: center; margin-top: 100rpx;" wx:else="{{productFilmList.length == 0}}">
+                    暂时没有产品数据~~~
+                </view>
+            </view>
+        </view>
+    </view>
+
+</view>

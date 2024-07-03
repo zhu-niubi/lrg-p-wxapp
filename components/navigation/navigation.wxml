@@ -1,0 +1,8 @@
+<view class="mg-navbar">
+    <van-nav-bar bind:click-left="gotoBack" custom-class="{{backgroud ? '' : 'page-color-tm'}}" border="{{false}}">
+        <van-icon name="arrow-left" size="48rpx" slot="left" class="page-padding-a-sm" style="color: {{color}};"/>
+        <view slot="title" style="color: {{color}};">
+            <slot></slot>
+        </view>
+    </van-nav-bar>
+</view>

@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "纳管家",
+    "usingComponents": {},
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark",
+    "component": true
+  }

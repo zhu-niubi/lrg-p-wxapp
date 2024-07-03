@@ -1,0 +1,168 @@
+<!-- index.wxml -->
+<view class="page-1">
+    <!-- 导航栏 -->
+    <!-- <navigation></navigation> -->
+    <!-- 头像授权/展示 -->
+    <block wx:if="{{ userInfo }}">
+
+        <view class="top-card round" style="{{ bgImg }}">
+
+            <view class="page-top-padding flex" style="padding-top:{{ navbarHeight }}px;">
+                <!-- 用户头像 -->
+                <view class="flex-3 clear-float">
+                    <view class="float-left" bindtap="{{userInfo.hasOpenId ? 'gotoUserInfo' : ''}}">
+                        <image class="userinfo-avatar-image" src="{{ userInfo.avatarUrl || '/images/moren.png' }}" mode="aspectFill"></image>
+                    </view>
+                    <!-- 用户昵称 -->
+
+                    <view wx:if="{{userInfo.id}}" class="float-left page-padding-l-sm">
+                        <text class="font-color-fff bold" data-index="{{ userInfo.id }}">
+                            {{ userInfo.nickname || userInfo.nickName || userInfo.username || '未知用户' }}
+                        </text>
+                        <text class="page-gray">{{userInfo.phoneNumber}}</text>
+                    </view>
+
+                    <view wx:if="{{ !userInfo.id }}" class="bold  float-left page-padding-l-sm page-padding-t-sm-1"><button plain="{{true}}" class="page-border-none" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">登陆/注册</button></view>
+
+                </view>
+                <view class="flex flex-1">
+                    <!-- 扫码 -->
+                    <view>
+                        <van-icon name="scan" size="48rpx" color="#fff" />
+                        <!-- <button class=" page-btn flat iconfont icon-saoma" bindtap="scanCode"></button> -->
+                    </view>
+                    <!-- 二维码 -->
+                    <view>
+                        <van-icon name="qr" size="48rpx" color="#fff" />
+                    </view>
+                    <!-- 消息 -->
+                    <view>
+                        <van-icon name="chat-o" size="48rpx" color="#fff" />
+                    </view>
+                </view>
+            </view>
+
+            <!--内容部分 -->
+            <view class="page-position page-padding-b-lg">
+                <!-- 我的车辆 -->
+                <view class="card page-lucency-1 clear-float" bindtap="{{userInfo.hasOpenId ? 'handleToMyCar' : 'getUserProfile'}}">
+                    <van-skeleton title row="1" loading="{{ !hasPhoneNumber }}">
+                        <view wx:if="{{myCarInfo.id}}">
+                            <view class=" page-margin-y-xs clear-float">
+                                <view class="float-left page-size-3">
+                                    <span>{{ myCarInfo.carBrand }} </span>
+                                    <span class="bold"> {{ myCarInfo.carName }} </span>
+                                </view>
+                                <view class="page-size-1 page-round-card page-lucency-2 float-left"> {{ myCarInfo.carNumber }}</view>
+                            </view>
+                            <view class="page-size-1 page-color-gray">{{ myCarInfo.color }}</view>
+                        </view>
+                        <view wx:else class="float-left">
+                            <view class="page-size-3">您还没有添加自己的爱车~</view>
+                        </view>
+                        <van-icon name="arrow" class="page-size-4 page-position-y" />
+
+                    </van-skeleton>
+                </view>
+                <view class="page-margin-y-xs" wx:if="{{noticeData}}">
+                    <van-notice-bar left-icon="volume-o" text="{{noticeData}}" />
+                </view>
+                <!-- 我的订单 -->
+                <view class="card">
+                    <van-skeleton title row="2" loading="{{ !hasPhoneNumber }}">
+                        <view class="page-margin-y-xs flex">
+                            <view class="page-size-3 bold">我的订单</view>
+                            <view class="page-color-gray page-size-1" bindtap="{{userInfo.hasOpenId ? 'gotoOrderPage' : 'getUserProfile'}}" data-index="0">全部订单
+                                <van-icon name="arrow" />
+                            </view>
+                        </view>
+                        <van-grid column-num="4" border="{{ false }}" custom-class="page-margin-t-md">
+                            <van-grid-item wx:for="{{ orderList }}" wx:for-item="itemOrder" wx:for-index="indexOrder" wx:key="indexOrder" bindtap="{{userInfo.hasOpenId ? 'gotoOrderPage' : 'getUserProfile'}}" data-index="{{ indexOrder+1 }}" icon="{{itemOrder.icon}}" text="{{itemOrder.name}}" badge="{{itemOrder.num}}" />
+                        </van-grid>
+
+                        <view wx:if="{{unpaidList.id}}" class="clear-float page-bj-gray-1 page-padding-a-xs round-xspage-position-r">
+                            <view class="float-left page-margin-t-xs">
+                                <image class="icon-img-1 page-round-xs" style="border-radius: 10rpx;height: 80rpx;width: 140rpx;" src="{{unpaidList.orderSku[0].productBanner[0]}}" mode="aspectFill" />
+                            </view>
+                            <view class="float-left page-margin-l-md">
+                                <view class=" page-size-1 page-padding-y-xs">{{unpaidList.payStage == 0 || unpaidList.payStage == 1 ? '待付款' : '待支付尾款'}} <span class="page-theme-color">￥{{unpaidList.amount}}</span></view>
+                                <view class="page-size-1 page-color-gray flex" wx:if="{{unpaidList.payStage == 0 || unpaidList.payStage == 1}}">
+                                    <span class="page-padding-t-xs" style="font-size: 20rpx;"> 剩余时间：</span>
+                                    <span style="height: 32rpx;">
+                                        <van-count-down use-slot time="{{unpaidList.deadline}}" bind:finish="orderFinish" bind:change="onchange">
+                                            <text class="item">{{timeData.hours}}</text>
+                                            <text class="item">:</text>
+                                            <text class="item">{{timeData.minutes}}</text>
+                                            <text class="item">:</text>
+                                            <text class="item">{{timeData.seconds}}</text>
+                                        </van-count-down>
+                                    </span>
+                                    <van-button custom-style="margin-left:40rpx" type="default" size="mini" round bindtap="deleteOrder">取消订单</van-button>
+                               
+                                    <van-button custom-style="margin-left:40rpx" color="#e8740b" type="default" size="mini" round
+                                        bindtap="gotoPay"
+                                    >支付订单</van-button>
+
+                                </view>
+                                <view class="page-size-1 page-color-gray flex" wx:else>
+                                    <span class="page-padding-t-xs"> 尾款支付时间：{{unpaidList.payBalanceAt}}</span>
+                                </view>
+
+                            </view>
+
+                            <!-- <van-button bind:click="gotoPay" data-id="{{unpaidList.id}}" size="small" round color="linear-gradient(40deg, #ff7416 0%, #dc462d 100%)" class="page-position-y">
+                                立即支付
+                            </van-button> -->
+                        </view>
+
+                    </van-skeleton>
+                </view>
+
+                <!-- 会员权益 -->
+                <view class="card" wx:if="{{equityList.length > 0}}">
+                    <van-skeleton title row="3" loading="{{ !hasPhoneNumber }}">
+                        <view class="page-margin-y-xs">
+                            <view class="page-size-3 bold">会员权益</view>
+                        </view>
+                        <van-grid column-num="{{equityList.length < 4 && equityList.length >1 ? equityList.length :'4' }}" border="{{ false }}" custom-class="page-padding-y-md">
+                            <van-grid-item use-slot wx:for="{{ equityList }}" wx:for-item="itemEquity" wx:for-index="indexEquity" wx:key="indexEquity" bindtap="{{userInfo.hasOpenId ? 'gotoWelfarePage' : 'getUserProfile'}}" data-index="{{ indexEquity }}">
+                                <van-image image-class="icon-img" fit="cover" src="{{ itemEquity.image }}" />
+                                <view class="page-size-1 page-padding-y-xs">{{ itemEquity.name }}</view>
+                            </van-grid-item>
+                        </van-grid>
+                    </van-skeleton>
+                </view>
+
+                <view class="card" wx:if="{{couponList.length > 0}}">
+                    <van-skeleton title row="3" loading="{{ !hasPhoneNumber }}">
+                        <view class="page-margin-y-xs">
+                            <view class="page-size-3 bold">我的卡券</view>
+                        </view>
+                        <van-grid column-num="{{couponList.length < 4  && couponList.length >1 ? couponList.length :'4' }}" border="{{ false }}" custom-class="page-padding-y-md">
+                            <van-grid-item use-slot wx:for="{{ couponList }}" wx:for-item="itemCoupon" wx:for-index="indexCoupon" wx:key="indexCoupon" bindtap="{{userInfo.hasOpenId ? 'gotoCouponPage' : 'getUserProfile'}}" data-id="{{ itemCoupon.id }}">
+                                <van-image image-class="icon-img" fit="cover" src="{{ itemCoupon.homePicture }}" />
+                                <view class="page-size-1 page-padding-y-xs">{{ itemCoupon.name }}</view>
+                            </van-grid-item>
+                        </van-grid>
+                    </van-skeleton>
+                </view>
+
+                <!-- 施工单 -->
+                <view class="card" wx:if="{{constructionList.length > 0}}">
+                    <van-skeleton title row="2" loading="{{ !hasPhoneNumber }}">
+                        <view class="page-margin-y-xs">
+                            <view class="page-size-3 bold">车主服务</view>
+                        </view>
+                        <van-grid column-num="{{constructionList.length < 4 && constructionList.length >1 ? constructionList.length :'4' }}" border="{{ false }}" custom-class="page-padding-y-md">
+                            <van-grid-item icon="{{itemBuild.icon}}" text="{{itemBuild.name}}" wx:for="{{ constructionList }}" wx:for-item="itemBuild" wx:for-index="indexBuild" wx:key="indexBuild" bindtap="{{userInfo.hasOpenId ? 'gotoServePage' : 'getUserProfile'}}" data-id="{{ itemBuild.id }}" />
+                        </van-grid>
+                    </van-skeleton>
+                </view>
+
+
+            </view>
+        </view>
+    </block>
+
+</view>
+<van-dialog id="van-dialog" />

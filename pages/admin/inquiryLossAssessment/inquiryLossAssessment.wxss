@@ -1,0 +1,44 @@
+.information:nth-last-child(2) {
+    border: 0;
+  }
+  
+.van-sidebar-item--selected {
+border-color: var(--sidebar-selected-border-color, #ff7416) !important;
+}
+
+.my .van-sidebar-item--selected {
+border-color: var(--sidebar-selected-border-color, #fff) !important;
+}
+
+.table {
+    /* border: solid; */
+    display: flex;
+    flex-direction: column;     /* 排列形式: 向下 */
+}
+.tr {
+    display: flex;
+    flex-direction: row;
+    /* border: solid; */
+}
+
+.th, .td {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 33%;
+    text-align: left; 
+    justify-content:center; 
+    align-items: center; 
+    /* border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    border-left: 1px solid #dadada;
+    border-right: 1px solid #dadada; */
+}
+
+.th {
+    /* width: 100%; */
+    font-weight: 800;
+}
+
+.td {
+}

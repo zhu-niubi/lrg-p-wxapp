@@ -1,0 +1,64 @@
+<!--packageA/consumerCoupon/consumerCoupon.wxml-->
+<view class="page">
+    <navigation>消费券</navigation>
+    <view class="page-position-fixed-t page-1" style="padding-top:{{navbarHeight}}px;">
+        <van-tabs color="#ff7416" active="{{ tabActive }}" bind:change="onTabChange">
+            <van-tab wx:for="{{orderTabList}}" wx:key="indexTab" wx:for-item="itemTab" title="{{itemTab.name}}"></van-tab>
+        </van-tabs>
+    </view>
+
+    <view class="content" style="padding-top:{{navbarHeight*1.5}}px;">
+        <view class="tickets" wx:if="{{consumerCouponList.length > 0}}" wx:for="{{consumerCouponList}}" wx:for-item="itemCoupon" wx:key="indexCoupon">
+            <view class="l-tickets">
+                <view style="color: {{tabActive == 0 ? '#F05626' : '#666'}};">
+                    消费券名称：{{itemCoupon.productName}}
+                </view>
+                <view>
+                    优惠券描述：{{itemCoupon.memo}}
+                </view>
+                <view>
+                    有效期截至：{{itemCoupon.deadline}}
+                </view>
+            </view>
+            <view class="r-tickets">
+                <view wx:if="{{tabActive == 0 || tabActive == 1}}">
+                    <view style="color: {{itemCoupon.status == 1 ? '#F05626' : '#666'}};">
+                        <view wx:if="{{itemCoupon.status == 1}}">未使用</view>
+                        <view wx:elif="{{itemCoupon.status == 2}}">已使用</view>
+                        <!-- <view wx:if="{{tabActive == 2}}">已过期</view> -->
+                    </view>
+                </view>
+                <view wx:if="{{tabActive == 2}}">
+                    <view style="color: #666">
+                        <view>已过期</view>
+                    </view>
+                </view>
+                <van-button wx:if="{{tabActive == 0}}" hairline="true" round="true" size="mini" color="#F05626" style="margin-left: 1.5em;" bindtap="handleExchange" data-code="{{itemCoupon.code}}" data-obj="{{itemCoupon}}">
+                    兑换
+                </van-button>
+            </view>
+        </view>
+    </view>
+</view>
+<van-popup show="{{ show }}" position="bottom" bind:close="onClose" custom-style="height: 80%; padding-top: 2em" round="true">
+    <view class="popup-content">
+        <view style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <view style="margin-top: 25%;">
+                <text>消费券卡号：{{code}}</text>
+            </view>
+            <text>【*请前往线下门店使用】</text>
+            <image class="page-position-auto" mode="scaleToFill" style="width: 200px; height: 200px;" src="{{renderImg}}" />
+            <view wx:if="{{isMask}}">
+                <view class="page-position-auto" wx:if="{{isSend}}">
+                    <view>
+                        <icon type="success" size="90"></icon>
+                    </view>
+                    <view>扫码成功</view>
+                </view>
+                <view wx:else>
+                    <van-icon name="replay" size="80rpx" class="page-position-auto" bindtap='handleMask' />
+                </view>
+            </view>
+        </view>
+    </view>
+</van-popup>
